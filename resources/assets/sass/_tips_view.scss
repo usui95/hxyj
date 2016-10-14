@@ -1,0 +1,28 @@
+.tips_view {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    margin-top: -5.85em
+}
+
+.tips_view .tips_msg {
+    padding: 5em 0 2em
+}
+
+.tips_view .tips_msg h3 {
+    font-size: 1.7em;
+    color: #50555B;
+    margin-bottom: .44118em
+}
+
+.tips_view .tips_btn {
+    width: 17em;
+    margin: 0 auto;
+    padding: 1.5em 0 3em
+}
+
+.tips_view .tips_btn a {
+    color: #333
+}

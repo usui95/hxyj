@@ -1,0 +1,66 @@
+.default-wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    background: #F53326 url(//s1.mi.com/m/images/m/default/20160202_6.png) 0 100% no-repeat;
+    -webkit-background-size: 7.2rem 4.07rem;
+    -moz-background-size: 7.2rem 4.07rem;
+    -ms-background-size: 7.2rem 4.07rem;
+    -o-background-size: 7.2rem 4.07rem;
+    background-size: 7.2rem 4.07rem
+}
+
+.default-wrap .dc_b1 .img {
+    width: 100%
+}
+
+.default-wrap .dc_b1 .img img {
+    width: 100%
+}
+
+.default-wrap .dc_b2 {
+    font-size: .34rem;
+    text-align: center;
+    color: #FFE05F;
+    margin-top: .24rem;
+    margin-bottom: .3rem
+}
+
+.default-wrap .dc_b3 a, .default-wrap .dc_b4 a {
+    display: block;
+    font-size: .36rem;
+    line-height: .94rem;
+    text-align: center;
+    -webkit-border-radius: .1rem;
+    -moz-border-radius: .1rem;
+    -ms-border-radius: .1rem;
+    -o-border-radius: .1rem;
+    border-radius: .1rem;
+    width: 3.4rem;
+    margin: 0 auto;
+    font-weight: 700
+}
+
+.default-wrap .dc_b3 {
+    margin-bottom: .2rem
+}
+
+.default-wrap .dc_b3 a {
+    color: #F53326;
+    background: #FFE05F
+}
+
+.default-wrap .dc_b4 {
+    filter: alpha(Opacity=80);
+    opacity: .8
+}
+
+.default-wrap .dc_b4 a {
+    color: #FFE05F;
+    font-size: .28rem;
+    line-height: .6rem;
+    text-decoration: underline
+}

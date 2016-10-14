@@ -1,0 +1,85 @@
+.share-component .share-component-wxtip {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, .8) url(//s1.mi.com/m/images/m/wxtip.png) 0 0 no-repeat;
+    -webkit-background-size: 7.02rem 4.08rem;
+    -moz-background-size: 7.02rem 4.08rem;
+    -ms-background-size: 7.02rem 4.08rem;
+    -o-background-size: 7.02rem 4.08rem;
+    background-size: 7.02rem 4.08rem
+}
+
+.share-component .share-component-mask {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, .6)
+}
+
+.share-component .share-component-content {
+    position: fixed;
+    background: #FFF;
+    left: 0;
+    right: 0;
+    bottom: 0
+}
+
+.share-component ul.share-nav {
+    display: box;
+    display: -webkit-box;
+    box-align: center;
+    -webkit-box-align: center;
+    margin: 0 .8rem
+}
+
+.share-component ul.share-nav li {
+    -webkit-box-flex: 1;
+    box-flex: 1;
+    width: 100%;
+    text-align: center;
+    padding: .2rem 0
+}
+
+.share-component ul.share-nav .spr {
+    width: .6rem;
+    height: .6rem;
+    background-image: url(//s1.mi.com/m/images/m/spr3.png);
+    -webkit-background-size: .6rem 2.4rem;
+    -moz-background-size: .6rem 2.4rem;
+    -ms-background-size: .6rem 2.4rem;
+    -o-background-size: .6rem 2.4rem;
+    background-size: .6rem 2.4rem;
+    margin: 0 auto;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -ms-border-radius: 100%;
+    -o-border-radius: 100%;
+    border-radius: 100%;
+    overflow: hidden
+}
+
+.share-component ul.share-nav .spr.spr1 {
+    background-position-y: -1.2rem
+}
+
+.share-component ul.share-nav .spr.spr2 {
+    background-position-y: -.6rem
+}
+
+.share-component ul.share-nav .spr.spr3 {
+    background-position-y: 0
+}
+
+.share-component ul.share-nav .spr.spr4 {
+    background-position-y: -1.8rem
+}
+
+.share-component ul.share-nav .name {
+    margin-top: .06rem;
+    font-size: .2rem
+}

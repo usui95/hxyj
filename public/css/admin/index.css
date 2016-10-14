@@ -1,0 +1,96 @@
+header{
+	width: 100%;
+	height: 85px;
+}
+.bdad{
+	background: #3c8cd2;
+}
+.navbar-default .navbar-nav>li>a,.navbar-default .navbar-brand{
+	color: #FFFFFF;
+	}
+	.navbar-default .navbar-nav>li>a:hover,.navbar-default .navbar-brand:hover{
+		color: #E1EDF7;
+	}
+header>img{
+	width: 100%;
+	height: 85px;
+}
+.sidebar-menu a:nth-child(1){
+	margin-top: 0;
+}
+.breadcrumb{
+	background-color: #428BCA;
+}
+.breadcrumb>.active{
+	color: #EFEFED;
+}
+.breadcrumb>li>a{
+	color: #FFFFFF;
+}
+/*一级菜单*/
+.menu-first{
+  height:45px;
+  line-height:45px;
+  background-color: #f8f8f8;
+  border-top: 1px solid #E7E7E7;
+  border-bottom: 1px solid #e1e1e1;
+  padding: 0;
+  margin-top: 20px;
+  font-size: 14px;
+  font-weight: normal;
+}
+/*一级菜单鼠标划过状态*/
+.menu-first:hover{
+  text-decoration: none;
+  background-color: #47739a;
+  border-top: 1px solid #b7b7b7;
+  border-bottom: 1px solid #acacac;
+  color: #F2F1F1;
+}
+/*二级菜单*/
+.menu-second li a{
+  background-color: #ffffff;
+  height:31px;
+  line-height:31px;
+  border-top: 1px solid #efefef;
+  border-bottom: 1px solid #efefef;
+  font-size: 12px;
+  text-align:center;
+}
+/*二级菜单鼠标划过样式*/
+.menu-second li a:hover {
+  text-decoration: none;
+  background-color: #66c3ec;
+  border-top: 1px solid #83ceed;
+  border-bottom: 1px solid #83ceed;
+  border-right: 3px solid #f8881c;
+  border-left: 3px solid #66c3ec;
+}
+.bord{
+	display: block;
+	background: #3c8cd2;
+	color: #FFFEF7;
+}
+/*二级菜单选中状态*/
+.menu-second-selected {
+  background-color: #66c3ec;
+  height:31px;
+  line-height:31px;
+  border-top: 1px solid #83ceed;
+  border-bottom: 1px solid #83ceed;
+  border-right: 3px solid #f8881c;
+  border-left: 3px solid #66c3ec;
+  text-align:center;
+}
+/*覆盖bootstrap的样式*/
+.nav-list,.nav-list li a{
+  padding: 0px;
+  margin: 0px;
+}
+.container{
+	width: 100%;
+	height: 100%;
+}
+.topa{
+	margin-top: 15px;
+}

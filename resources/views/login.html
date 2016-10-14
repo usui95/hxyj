@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="page">
+    <header class="bar bar-nav">
+      <h1 class="title">《江西烟酒.网址》管理后台</h1>
+    </header>
+    <div class="content">
+      <div class="list-block">
+        <form id="backend-login-form">
+          <ul>
+            <li>
+              <div class="item-content">
+                <div class="item-media">
+                  <i class="icon icon-form-name"></i>
+                </div>
+                <div class="item-inner">
+                  <div class="item-title label">
+                    手机号
+                  </div>
+                  <div class="item-input">
+                    <input type="text" name="mobile" placeholder="请输入手机号">
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="item-content">
+                <div class="item-media">
+                  <i class="icon icon-form-name"></i>
+                </div>
+                <div class="item-inner">
+                  <div class="item-title label">
+                    密码
+                  </div>
+                  <div class="item-input">
+                    <input type="password" name="password" placeholder="请输入密码">
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </form>
+      </div>
+      <div class="content-block">
+        <div class="row">
+          <div class="col-50"><a href="#" class="button button-big button-fill button-danger btn-cancel">取消</a></div>
+          <div class="col-50"><a href="#" class="button button-big button-fill button-success btn-login">登录</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script src="/js/backend/login.js"></script>
+{% endblock %}
