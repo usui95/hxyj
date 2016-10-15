@@ -1,4 +1,3 @@
-
 @extends('../layout')
 
 @section('body')
@@ -11,7 +10,7 @@
   				<div class="bd">
   					<ul>
                 <?php foreach($slides as $slide): ?>
-                    <li><a href="<?php echo $slide->url; ?>"><img _src="<?php echo $slide->src; ?>" src="images/blank.png" /></a></li>
+                    <li><a href="<?php echo $slide->url; ?>"><img src="<?php echo $slide->src; ?>" /></a></li>
                 <?php endforeach;  ?>
   					</ul>
   				</div>
@@ -44,7 +43,7 @@
                             <?php endif; ?>
                           </div>
                           <div class="info">
-                              <div class="name"><p><?php echo $shop->name; ?></p></div>
+                              <div class="name"><p><?php echo $shop->name; ?>22</p></div>
                               <div class="brief"><p><?php echo $shop->address; ?></p></div>
                               <div class="price"><p><?php echo $shop->tel; ?></p></div>
                           </div>
