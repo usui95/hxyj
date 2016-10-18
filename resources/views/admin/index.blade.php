@@ -9,6 +9,7 @@
 		<link rel="stylesheet" type="text/css" href="/css/admin/index.css" />
 	</head>
 	<body>
+		{{ csrf_field() }}
 		<header>
 			<img src="/image/admin/1.jpg" />
 		</header>

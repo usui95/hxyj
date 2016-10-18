@@ -46,10 +46,12 @@ Route::get('/c', 'IndexController@category')->name('category');
 // 商品详情页
 Route::resource('goods', 'GoodsController');
 
+/* 通用服务 */
+Route::resource('photos', 'PhotoController');
 
 /*   后台路由   */
 
 // 后台首页
 Route::get('/admin', 'Admin\IndexController@index')->name('admin');
-Route::resource('shop', 'Admin\ShopController');
-Route::resource('goods', 'Admin\GoodsController');
+Route::resource('/admin/shops', 'Admin\ShopController');
+Route::resource('/admin/goods', 'Admin\GoodsController');

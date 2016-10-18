@@ -26,7 +26,7 @@
     </a>
   </li> -->
   <li>
-    <a href="/1/#/user/index">
+    <a href="#">
       <div class="nav">
         <div class="if ispr"></div>
         <p>我的</p>

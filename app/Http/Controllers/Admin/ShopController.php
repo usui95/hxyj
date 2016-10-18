@@ -6,9 +6,13 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Models\Shop;
 
 class ShopController extends Controller
 {
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -24,16 +28,9 @@ class ShopController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        // 过滤
 
-        // 校验
-
-        // 执行
-
-        // 发送
-        
     }
 
     /**
@@ -44,7 +41,28 @@ class ShopController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // 过滤 @todo
+        $input = $request->all();
+
+        // 校验
+        // 校验商户是否已经录入
+        $shop = Shop::where('tel', $input['tel'])->where('address', $input['address'])->first();
+        if (!empty($shop)) {
+            return response()->json(['msg' => '该门店已添加，无需重复添加']);
+        }
+
+        // 执行
+        $shop = new Shop();
+        $shop->tel = $input['tel'];
+        $shop->address = $input['address'];
+        $shop->name = $input['name'];
+        $shop->manager = $input['manager'];
+        $shop->logo = $input['logo'];
+        $shop->create_time = time();
+        $shop->save();
+
+        // 发送
+        return response()->json(['msg' => '添加成功', 'data' => $shop]);
     }
 
     /**
