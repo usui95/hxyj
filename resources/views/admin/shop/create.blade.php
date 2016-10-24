@@ -1,6 +1,7 @@
 @extends('admin.layout')
 
 @section('content')
+
     <ol class="breadcrumb">
         <li>
             <a href="#">首页</a>
@@ -10,99 +11,61 @@
         </li>
         <li class="active">Data</li>
     </ol>
-    <form class="form-inline" role="form">
-        <div class="form-group">姓名：
-            <label class="sr-only" for="exampleInputEmail2">姓名</label>
-            <input type="email" class="form-control" id="exampleInputEmail2" placeholder="姓名">
+    <form role="form">
+        {{ csrf_field() }}
+        <div class="form-group">
+            <label for="name">店名:</label>
+            <input type="text" required class="form-control" id="name" placeholder=" 请输入店名">
         </div>
-        <div class="form-group">日期：
-            <div class="input-group">
-                <input class="form-control" type="date" placeholder="日期">
-            </div>
+        <div class="form-group">
+            <label for="manager">负责人信息:</label>
+            <input type="text" required class="form-control" id="manager" placeholder="请输入负责人信息">
         </div>
-        <div class="form-group">职位：
-            <label class="sr-only" for="exampleInputPassword2">职位</label>
-            <input type="text" class="form-control" id="exampleInputPassword2" placeholder="查询职位">
-        </div>
-        <button type="submit" class="btn btn-success">查询</button>
-    </form>
-    <div class="container topa">
-        <table class="table table-striped">
-            <tr>
-                <td>序号</td>
-                <td>姓名</td>
-                <td>职位</td>
-                <td>**</td>
-                <td>**</td>
-                <td>**</td>
-            </tr>
 
-            <tr>
-                <td>
-                </td>
-                <td>
-                </td>
-                <td>
-                </td>
-                <td>**</td>
-                <td>**</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>**</td>
-                <td>**</td>
-                <td>**</td>
-                <td>**</td>
-                <td>**</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>**</td>
-                <td>**</td>
-                <td>**</td>
-                <td>**</td>
-                <td>**</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>**</td>
-                <td>**</td>
-                <td>**</td>
-                <td>**</td>
-                <td>**</td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>**</td>
-                <td>**</td>
-                <td>**</td>
-                <td>**</td>
-                <td>**</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>**</td>
-                <td>**</td>
-                <td>**</td>
-                <td>**</td>
-                <td>**</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>**</td>
-                <td>**</td>
-                <td>**</td>
-                <td>**</td>
-                <td>**</td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>**</td>
-                <td>**</td>
-                <td>**</td>
-                <td>**</td>
-                <td>**</td>
-            </tr>
-        </table>
-    </div>
+        <div class="form-group">
+            <label for="address">地址:</label>
+            <input type="text" required class="form-control" id="address" placeholder="请输入店铺地址">
+        </div>
+        <div class="form-group">
+            <label for="logo">店铺LOGO:</label>
+            <input type="text" required class="form-control" id="logo" placeholder="请输入店铺LOGO">
+        </div>
+        <div class="form-group">
+            <label for="tel">手机号码:</label>
+            <input type="tel" required class="form-control" id="tel" placeholder="请输入联系信息">
+        </div>
+        <button type="button" id="submit" class="btn btn-default">提交</button>
+        &nbsp;&nbsp;
+        <button type="reset" class="btn btn-default">重置</button>
+    </form>
+    <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.js"></script>
+    <script type="text/javascript">
+        $('#submit').click(function () {
+            if ($("#name").val() == "" || $("#address").val() == "" || $("#tel").val() == "" || $("#logo").val == "" || $("#manager").val() == "") {
+                alert(" 请输入完整的信息");
+                return false;
+            }
+            else {
+                var jsonAdmin = {
+                    _token: $('input[name="_token"]').val(),
+                    name: $("#name").val(),
+                    tel: $("#tel").val(),
+                    manager: $("#manager").val(),
+                    logo: $("#logo").val(),
+                    address: $("#address").val()
+                }
+                $.ajax({
+                    url: '/admin/shops',
+                    type: 'post',
+                    data: jsonAdmin,
+                    datatype: 'json',
+                    success: function () {
+                        $("#form input").val("");
+                        //如果请求传输成功 则清空input输入框
+                    }
+                })
+            }
+        })
+    </script>
 @endsection
+
