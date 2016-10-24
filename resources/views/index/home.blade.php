@@ -1,5 +1,6 @@
 @extends('../layout')
 
+
 @section('body')
 <div id="wrapper">
     <div class="page-index" id="home">
@@ -58,6 +59,7 @@
 </div>
 @endsection
 
+
 @section('js')
 <script type="text/javascript" src="/js/third/TouchSlide.1.1.js"></script>
 <script type="text/javascript">
@@ -72,3 +74,5 @@
   });
 </script>
 @endsection
+
+
