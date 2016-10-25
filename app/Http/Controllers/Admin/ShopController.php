@@ -20,7 +20,12 @@ class ShopController extends Controller
      */
     public function index()
     {
-        //
+        // 获取列表
+        $shops = Shop::all();
+
+        return view('admin.shop.index', [
+            'shops' => $shops,
+        ]);
     }
 
     /**
