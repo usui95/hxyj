@@ -4,14 +4,14 @@
 @section('body')
     <div id="wrapper">
         <div class="page-index" id="home">
-            <div id="focus" class="focus" style="width: 100%;">
+            <div id="focus" class="focus" style="width: 100%;height:auto;">
                 <div class="hd">
                     <ul></ul>
                 </div>
                 <div class="bd">
                     <ul>
                         <?php foreach($slides as $slide): ?>
-                        <li><a href="<?php echo $slide->url; ?>"><img src="<?php echo $slide->src; ?>"/></a></li>
+                        <li><a href="<?php echo $slide->url; ?>"><img src="<?php echo $slide->src; ?>"  style="height:auto;"/></a></li>
                         <?php endforeach;  ?>
                     </ul>
                 </div>
