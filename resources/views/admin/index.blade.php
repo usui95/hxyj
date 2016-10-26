@@ -28,14 +28,7 @@
     </form>
     <div class="container topa">
         <table class="table table-striped">
-            <tr>
-                <td>序号</td>
-                <td>姓名</td>
-                <td>职位</td>
-                <td>**</td>
-                <td>**</td>
-                <td>**</td>
-            </tr>
+
 
         </table>
     </div>
