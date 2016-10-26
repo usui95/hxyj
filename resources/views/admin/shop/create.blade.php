@@ -11,7 +11,7 @@
         </li>
         <li class="active">Data</li>
     </ol>
-    <form role="form">
+    <form role="form" id="form">
         {{ csrf_field() }}
         <div class="form-group">
             <label for="name">店名:</label>
@@ -38,7 +38,6 @@
         &nbsp;&nbsp;
         <button type="reset" class="btn btn-default">重置</button>
     </form>
-    <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.js"></script>
     <script type="text/javascript">
         $('#submit').click(function () {
             if ($("#name").val() == "" || $("#address").val() == "" || $("#tel").val() == "" || $("#logo").val == "" || $("#manager").val() == "") {
@@ -59,9 +58,9 @@
                     type: 'post',
                     data: jsonAdmin,
                     datatype: 'json',
-                    success: function () {
+                    success: function (data) {
+                        alert(data.msg);
                         $("#form input").val("");
-                        //如果请求传输成功 则清空input输入框
                     }
                 })
             }

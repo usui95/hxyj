@@ -23,6 +23,7 @@ class ShopController extends Controller
         // 获取列表
         $shops = Shop::all();
 
+
         return view('admin.shop.index', [
             'shops' => $shops,
         ]);
