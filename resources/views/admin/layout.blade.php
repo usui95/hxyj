@@ -8,7 +8,6 @@
     <link rel="stylesheet" type="text/css" href="/css/admin/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/css/admin/index.css" />
     <script type="text/javascript" src="/js/admin/jquery-3.1.0.js"></script>
-
 </head>
 <body>
 @include('admin.header')

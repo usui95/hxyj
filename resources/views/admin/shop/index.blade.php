@@ -42,6 +42,7 @@
     </form>
     <div id="put">
         <form role="form" id="form">
+
             <div class="form-group">
                 <label for="name">店名:</label>
                 <input type="text" required class="form-control" id="name" placeholder=" 请输入店名">
@@ -93,7 +94,7 @@
                     <td>{{$shop->logo}}</td>
                     <td>{{$shop->address}}</td>
                     <td>
-                        <button type="button" class="put">修改</button>
+                        <button type="button" class="put">{{ csrf_field() }}修改</button>
                         <button type="button" class="delete">删除</button>
                     </td>
                 </tr>
@@ -108,6 +109,7 @@
                     url:'',
                     type:'post',
                     data:{
+                        _token:$('input[name="_token"]').val(),
                         id:PUT
                     },
                    success:function(data){
