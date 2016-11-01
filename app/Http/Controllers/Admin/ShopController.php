@@ -18,10 +18,14 @@ class ShopController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         // 获取列表
-        $shops = Shop::all();
+        if ($request->input('tel')) {
+            $shops = Shop::where('tel', $request->get('tel'))->simplePaginate(10);
+        } else {
+            $shops = Shop::simplePaginate(10);
+        }
 
         return view('admin.shop.index', [
             'shops' => $shops,
