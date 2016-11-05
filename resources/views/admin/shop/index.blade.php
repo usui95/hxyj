@@ -12,7 +12,7 @@
             display: none;
         }
     </style>
-    
+
     <ol class="breadcrumb">
         <li>
             <a href="#">首页</a>
@@ -105,8 +105,8 @@
         $("#res").on('click','.put',function(e){
             var PUT=$(this).parent().prevAll().eq(6).html();
                 $.ajax({
-                    url:'',
-                    type:'post',
+                    url:'admin/shops/update',
+                    type:'PUT',
                     data:{
                         _token:$('input[name="_token"]').val(),
                         id:PUT

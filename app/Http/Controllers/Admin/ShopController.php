@@ -10,9 +10,6 @@ use App\Models\Shop;
 
 class ShopController extends Controller
 {
-
-
-
     /**
      * Display a listing of the resource.
      *
@@ -22,7 +19,6 @@ class ShopController extends Controller
     {
         // 获取列表
         $shops = Shop::all();
-
 
         return view('admin.shop.index', [
             'shops' => $shops,
@@ -80,6 +76,7 @@ class ShopController extends Controller
     public function show($id)
     {
         //
+        return '000http0';
     }
 
     /**
@@ -90,7 +87,10 @@ class ShopController extends Controller
      */
     public function edit($id)
     {
-        //
+        //return '11a';
+        $shop = Shop::find($id);
+        return view('admin.shop.update',['shops'=>$shop]);
+
     }
 
     /**

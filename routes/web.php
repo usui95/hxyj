@@ -55,3 +55,6 @@ Route::resource('photos', 'PhotoController');
 Route::get('/admin', 'Admin\IndexController@index')->name('admin');
 Route::resource('/admin/shops', 'Admin\ShopController');
 Route::resource('/admin/goods', 'Admin\GoodsController');
+// Route::resource('/admin/create', 'Admin\GoodsController');
+
+

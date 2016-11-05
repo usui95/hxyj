@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Goods;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -14,10 +15,13 @@ class GoodsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //商品列表
     public function index()
     {
-        //
-        
+        // 读取数据库
+        $goods = Goods::all();
+        //dd($goods);
+       return view('admin.goods.index',['goods'=>$goods]);
     }
 
     /**
@@ -27,7 +31,8 @@ class GoodsController extends Controller
      */
     public function create()
     {
-        //
+        //新增商品页
+        //return 'aa';
     }
 
     /**
@@ -36,20 +41,23 @@ class GoodsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    //保存方法
     public function store(Request $request)
     {
-        //
+        //保存新增数据
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified  .
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //显示选择商品信息
     public function show($id)
     {
         //
+
     }
 
     /**
@@ -58,9 +66,10 @@ class GoodsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //修改信息页
     public function edit($id)
     {
-        //
+        //编辑指定的内容
     }
 
     /**
@@ -70,9 +79,10 @@ class GoodsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //更新方法
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**
@@ -81,8 +91,9 @@ class GoodsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //删除商品
     public function destroy($id)
     {
-        //
+
     }
 }
