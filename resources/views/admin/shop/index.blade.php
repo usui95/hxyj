@@ -12,16 +12,16 @@
             display: none;
         }
     </style>
-    
+
     <ol class="breadcrumb">
         <li>
             <a href="#">首页</a>
         </li>
 
         <li>
-            <a href="#">Library</a>
+            <a href="#">商户管理</a>
         </li>
-        <li class="active">Data</li>
+        <li class="active">列表</li>
     </ol>
     <form class="form-inline" role="form">
         <div class="form-group">姓名：
