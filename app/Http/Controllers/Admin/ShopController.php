@@ -71,7 +71,9 @@ class ShopController extends Controller
         $shop->save();
 
         // 发送
-        return response()->json(['msg' => '添加成功', 'data' => $shop]);
+        return response()->json(['msg' => '添加成功', 'data' => [
+            'shop' => $shop
+        ]]);
     }
 
     /**
@@ -97,7 +99,6 @@ class ShopController extends Controller
     public function edit($id)
     {
         $shop = Shop::find($id);
-
         return view('admin.shop.edit', [
             'shop' => $shop,
         ]);
@@ -130,7 +131,9 @@ class ShopController extends Controller
         $shop->save();
 
         // 发送
-        return response()->json(['msg' => '编辑成功', 'data' => $shop]);
+        return response()->json(['msg' => '编辑成功', 'data' => [
+            'shop' => $shop
+        ]]);
     }
 
     /**
@@ -143,13 +146,12 @@ class ShopController extends Controller
     {
         // 校验商户是否存在
         $shop = Shop::find($id);
-        var_dump($shop);exit;
         if (empty($shop)) {
             return response()->json(['msg' => '门店不存在,请核实']);
         }
 
         // 删除
-        $shop->softDeletes();
+        $shop->delete();
 
         // 发送
         return response()->json(['msg' => '删除成功']);

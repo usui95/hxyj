@@ -11,6 +11,8 @@ class Shop extends Model
 
     protected $dates = ['deleted_at'];
 
+    protected $dateFormat = 'U';
+
     public $timestamps = false;
 
 }
