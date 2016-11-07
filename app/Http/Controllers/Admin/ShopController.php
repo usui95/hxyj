@@ -83,10 +83,9 @@ class ShopController extends Controller
     public function show($id)
     {
         $shop = Shop::find($id);
-
-        return view('admin.shop.show', [
+        return response()->json(['data' => [
             'shop' => $shop,
-        ]);
+        ]]);
     }
 
     /**

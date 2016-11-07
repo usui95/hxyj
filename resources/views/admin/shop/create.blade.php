@@ -7,9 +7,9 @@
             <a href="#">首页</a>
         </li>
         <li>
-            <a href="#">Library</a>
+            <a href="#">商户管理</a>
         </li>
-        <li class="active">Data</li>
+        <li class="active">新增</li>
     </ol>
     <form role="form" id="form">
         {{ csrf_field() }}
