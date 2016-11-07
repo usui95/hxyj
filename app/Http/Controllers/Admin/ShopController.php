@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
+header('Content-type:text/json');
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -80,6 +80,8 @@ class ShopController extends Controller
     public function show($id)
     {
         //
+        $array = ["a"=>"a"];
+        var_dump($array);
     }
 
     /**
@@ -88,9 +90,14 @@ class ShopController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function edit($id)
     {
-        //
+
+        //编辑
+        $id = $_GET['id'];
+        $shops = Shop::find($id);
+       echo json_encode($shops);
     }
 
     /**
@@ -103,6 +110,11 @@ class ShopController extends Controller
     public function update(Request $request, $id)
     {
         //
+
+       // $data = $request->all();
+        //echo $data;
+        echo 'aa';
+
     }
 
     /**

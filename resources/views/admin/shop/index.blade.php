@@ -43,8 +43,14 @@
         <form role="form" id="form">
 
             <div class="form-group">
+                <label for="name1">ID:</label>
+                <input type="text" required class="form-control" id="id1"  value="" disabled>
+            </div>
+
+
+            <div class="form-group">
                 <label for="name">店名:</label>
-                <input type="text" required class="form-control" id="name" placeholder=" 请输入店名">
+                <input type="text" required class="form-control" id="name"  placeholder=" 请输入店名">
             </div>
             <div class="form-group">
                 <label for="manager">负责人信息:</label>
@@ -98,24 +104,51 @@
                     </td>
                 </tr>
             @endforeach
-
         </table>
     </div>
     <script type="text/javascript">
         $("#res").on('click','.put',function(e){
             var PUT=$(this).parent().prevAll().eq(6).html();
                 $.ajax({
-                    url:'',
-                    type:'post',
+                    url:'/admin/shops/show/edit',
+                    type:'get',
                     data:{
                         _token:$('input[name="_token"]').val(),
                         id:PUT
                     },
+                    dataType:'json',
                    success:function(data){
                         console.log(data);
+                       $("#id1").val(data.id);
+                        $("#name").val(data.name);
+                       $("#manager").val(data.manager);
+                       $("#tel").val(data.tel);
+                       $("#logo").val(data.logo);
+                       $("#address").val(data.address);
                    }
                 })
             $("#put").show();
+        })//点击出现一个隐藏的模态框
+        $("#button").click(function (){
+            var JSon = {
+                _token: $('input[name="_token"]').val(),
+                name: $("#name").val(),
+                tel: $("#tel").val(),
+                manager: $("#manager").val(),
+                logo: $("#logo").val(),
+                address: $("#address").val()
+            }
+
+            $.ajax({
+                url:'/admin/shops/update',
+                type:'put',
+                data:JSon,
+                datatype:'json',
+                success:function(data){
+                    console.log(data);
+                    $("#botton").hide();
+                }
+            })
         })
         $("#cancel").click(function(){
             $("#put").hide();
