@@ -11,8 +11,6 @@ use App\Models\Shop;
 class ShopController extends Controller
 {
 
-
-
     /**
      * Display a listing of the resource.
      *
