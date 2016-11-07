@@ -20,6 +20,7 @@ class GoodsController extends Controller
     {
         // 读取数据库
         $goods = Goods::all();
+        //dd($goods);
        return view('admin.goods.index',['goods'=>$goods]);
     }
 
@@ -58,6 +59,7 @@ class GoodsController extends Controller
         $goods->category = $data['category'];
         $goods->score = $data['score'];
         $goods->comment = $data['comment'];
+        $goods->create_time = time();
         if($goods->save()){
             echo resopen()->json('添加商品成功'.$goods);
         }
@@ -73,7 +75,8 @@ class GoodsController extends Controller
     public function show($id)
     {
         //显示选择商品信息
-
+        $goods = Goods::find($id);
+        return view('admin.goods.show',['show'=>$goods]);
     }
 
     /**
@@ -87,8 +90,8 @@ class GoodsController extends Controller
     {
         //编辑指定的内容
         $shop = Goods::find($id);
-       // return view('admin.shop.update',["shop"=>$shop]);
-        echo json_encode($shop);
+        return view('admin.shop.update',["shop"=>$shop]);
+       // echo json_encode($shop);
     }
 
     /**
@@ -111,7 +114,7 @@ class GoodsController extends Controller
         $goods->score = $data['score'];
         $goods->comment = $data['comment'];
         $goods->save();
-       // echo json_encode($goods);
+
         return response()->json(['update' => '更新成功', 'data' => $goods]);
     }
 
