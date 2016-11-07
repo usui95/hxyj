@@ -104,34 +104,35 @@
     <script type="text/javascript">
         $("#res").on('click','.put',function(e){
             var PUT=$(this).parent().prevAll().eq(6).html();
-                $.ajax({
-                    url:'admin/shops/update',
-                    type:'PUT',
-                    data:{
-                        _token:$('input[name="_token"]').val(),
-                        id:PUT
-                    },
-                   success:function(data){
-                        console.log(data);
-                   }
-                })
+            $.ajax({
+                url:'/admin/shops/show/edit',
+                type:'get',
+                datatype:'json',
+                data:{
+                    _token:$('input[name="_token"]').val(),
+                    id:PUT
+                },
+                success:function(data){
+                    console.log(data);
+                }
+            })
             $("#put").show();
         })
         $("#cancel").click(function(){
             $("#put").hide();
         })
-//        $("#res").on('click','.delete',function(e){
-//           var DELETE=$(this).parent().prevAll().eq(6).html();
-//            $.ajax({
-//                url:'',
-//                type:'post',
-//                data:{
-//                    id:DELETE
-//                },
-//                success:function(){
-//                    alert("删除成功");
-//                }
-//            })
-//        })
+        //        $("#res").on('click','.delete',function(e){
+        //           var DELETE=$(this).parent().prevAll().eq(6).html();
+        //            $.ajax({
+        //                url:'',
+        //                type:'post',
+        //                data:{
+        //                    id:DELETE
+        //                },
+        //                success:function(){
+        //                    alert("删除成功");
+        //                }
+        //            })
+        //        })
     </script>
 @endsection

@@ -20,7 +20,6 @@ class GoodsController extends Controller
     {
         // 读取数据库
         $goods = Goods::all();
-        //dd($goods);
        return view('admin.goods.index',['goods'=>$goods]);
     }
 
@@ -32,7 +31,7 @@ class GoodsController extends Controller
     public function create()
     {
         //新增商品页
-        //return 'aa';
+        return view('admin.goods.create');
     }
 
     /**
@@ -45,6 +44,23 @@ class GoodsController extends Controller
     public function store(Request $request)
     {
         //保存新增数据
+        $data = $request->all();
+        //验证商品是否存在
+        $goods = Goods::where('id',$data['id'])->first();
+        if(isset($goods)){
+            echo response()->json( '商品已存在，无需填添加');
+        }
+        $goods = new Goods();
+        $goods->name = $data['name'];
+        $goods->nickname = $data['nickname'];
+        $goods->description = $data['description'];
+        $goods->price = $data['price'];
+        $goods->category = $data['category'];
+        $goods->score = $data['score'];
+        $goods->comment = $data['comment'];
+        if($goods->save()){
+            echo resopen()->json('添加商品成功'.$goods);
+        }
     }
 
     /**
@@ -53,10 +69,10 @@ class GoodsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    //显示选择商品信息
+
     public function show($id)
     {
-        //
+        //显示选择商品信息
 
     }
 
@@ -70,6 +86,9 @@ class GoodsController extends Controller
     public function edit($id)
     {
         //编辑指定的内容
+        $shop = Goods::find($id);
+       // return view('admin.shop.update',["shop"=>$shop]);
+        echo json_encode($shop);
     }
 
     /**
@@ -82,7 +101,18 @@ class GoodsController extends Controller
     //更新方法
     public function update(Request $request, $id)
     {
-
+        $data = $request->all();
+        $goods = Goods::find($id);
+        $goods->name = $data['name'];
+        $goods->nickname = $data['nickname'];
+        $goods->description = $data['description'];
+        $goods->price = $data['price'];
+        $goods->category = $data['category'];
+        $goods->score = $data['score'];
+        $goods->comment = $data['comment'];
+        $goods->save();
+       // echo json_encode($goods);
+        return response()->json(['update' => '更新成功', 'data' => $goods]);
     }
 
     /**
@@ -94,6 +124,8 @@ class GoodsController extends Controller
     //删除商品
     public function destroy($id)
     {
-
+        $goods = Goods::find($id);
+        $goods->delete();
+        return response()->json(["del"=>"删除成功"]);
     }
 }

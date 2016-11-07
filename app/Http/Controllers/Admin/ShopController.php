@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+//header("Content-Type:application/json;charset=utf-8");
+header("Content-type:application/json;charset=utf-8");
 
 use Illuminate\Http\Request;
 
@@ -19,7 +21,7 @@ class ShopController extends Controller
     {
         // 获取列表
         $shops = Shop::all();
-
+         // dd($shops);
         return view('admin.shop.index', [
             'shops' => $shops,
         ]);
@@ -76,7 +78,7 @@ class ShopController extends Controller
     public function show($id)
     {
         //
-        return '000http0';
+
     }
 
     /**
@@ -85,12 +87,12 @@ class ShopController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function edit($id)
     {
-        //return '11a';
-        $shop = Shop::find($id);
-        return view('admin.shop.update',['shops'=>$shop]);
-
+        $id = $_GET['id'];
+        $shop =  Shop::find($id);
+        echo json_encode($shop);
     }
 
     /**
@@ -102,7 +104,19 @@ class ShopController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $shops = Shop::find($id);
+       // $shops = new Shop();
+        $shops->name = $data['name'];
+        $shops->manager = $data['manager'];
+        $shops->address = $data['address'];
+        $shops->logo = $data['logo'];
+        $shops->tel = $data['tel'];
+        if($shops->save){
+            echo json_encode($shops);
+        }
+        //发送
+        return response()->json(['up'=>'更新成功','data'=>$shops]);
     }
 
     /**
