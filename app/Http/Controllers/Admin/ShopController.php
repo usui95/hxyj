@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-//header("Content-Type:application/json;charset=utf-8");
-header("Content-type:application/json;charset=utf-8");
 
 use Illuminate\Http\Request;
 
@@ -17,11 +15,16 @@ class ShopController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         // 获取列表
-        $shops = Shop::all();
-         // dd($shops);
+       // $shops = Shop::all();
+        if ($request->input('tel')) {
+            $shops = Shop::where('tel', $request->get('tel'))->simplePaginate(10);
+        } else {
+            $shops = Shop::simplePaginate(10);
+        }
+
         return view('admin.shop.index', [
             'shops' => $shops,
         ]);
@@ -47,14 +50,12 @@ class ShopController extends Controller
     {
         // 过滤 @todo
         $input = $request->all();
-
         // 校验
         // 校验商户是否已经录入
         $shop = Shop::where('tel', $input['tel'])->where('address', $input['address'])->first();
         if (!empty($shop)) {
             return response()->json(['msg' => '该门店已添加，无需重复添加']);
         }
-
         // 执行
         $shop = new Shop();
         $shop->tel = $input['tel'];
@@ -66,7 +67,9 @@ class ShopController extends Controller
         $shop->save();
 
         // 发送
-        return response()->json(['msg' => '添加成功', 'data' => $shop]);
+        return response()->json(['msg' => '添加成功', 'data' => [
+            'shop' => $shop
+        ]]);
     }
 
     /**
@@ -77,8 +80,10 @@ class ShopController extends Controller
      */
     public function show($id)
     {
-        //
-
+        $shop = Shop::find($id);
+        return response()->json(['data' => [
+            'shop' => $shop,
+        ]]);
     }
 
     /**
@@ -87,14 +92,13 @@ class ShopController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
     public function edit($id)
     {
-        $id = $_GET['id'];
-        $shop =  Shop::find($id);
-        echo json_encode($shop);
+        $shop = Shop::find($id);
+        return view('admin.shop.edit', [
+            'shop' => $shop,
+        ]);
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -104,19 +108,27 @@ class ShopController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->all();
-        $shops = Shop::find($id);
-       // $shops = new Shop();
-        $shops->name = $data['name'];
-        $shops->manager = $data['manager'];
-        $shops->address = $data['address'];
-        $shops->logo = $data['logo'];
-        $shops->tel = $data['tel'];
-        if($shops->save){
-            echo json_encode($shops);
+        // 过滤 @todo
+        $input = $request->all();
+
+        // 校验商户是否存在
+        $shop = Shop::find($id);
+        if (empty($shop)) {
+            return response()->json(['msg' => '门店不存在,请核实']);
         }
-        //发送
-        return response()->json(['up'=>'更新成功','data'=>$shops]);
+
+        // 执行
+        $shop->tel = $input['tel'];
+        $shop->address = $input['address'];
+        $shop->name = $input['name'];
+        $shop->manager = $input['manager'];
+        $shop->logo = $input['logo'];
+        $shop->save();
+
+        // 发送
+        return response()->json(['msg' => '编辑成功', 'data' => [
+            'shop' => $shop
+        ]]);
     }
 
     /**
@@ -127,6 +139,17 @@ class ShopController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // 校验商户是否存在
+        $shop = Shop::find($id);
+        if (empty($shop)) {
+            return response()->json(['msg' => '门店不存在,请核实']);
+        }
+
+        // 删除
+        $shop->delete();
+
+        // 发送
+        return response()->json(['msg' => '删除成功']);
+
     }
 }

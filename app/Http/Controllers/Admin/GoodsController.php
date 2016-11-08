@@ -1,10 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
 use App\Models\Goods;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -16,11 +14,15 @@ class GoodsController extends Controller
      * @return \Illuminate\Http\Response
      */
     //商品列表
-    public function index()
+    public function index(Request $request)
     {
         // 读取数据库
-        $goods = Goods::all();
-        //dd($goods);
+       // $goods = Goods::all();
+        if($request->input('name')){
+            $goods = Goods::where('name',$request->get('name'))->simplePaginate(10);
+        }else{
+            $goods = Goods::simplePaginate(10);
+        }
        return view('admin.goods.index',['goods'=>$goods]);
     }
 
@@ -60,9 +62,9 @@ class GoodsController extends Controller
         $goods->score = $data['score'];
         $goods->comment = $data['comment'];
         $goods->create_time = time();
-        if($goods->save()){
-            echo resopen()->json('添加商品成功'.$goods);
-        }
+        $goods->save();
+            echo resopen()->json(['msg'=>'添加成功','data'=>['goods'=>$goods]]);
+
     }
 
     /**
@@ -76,7 +78,7 @@ class GoodsController extends Controller
     {
         //显示选择商品信息
         $goods = Goods::find($id);
-        return view('admin.goods.show',['show'=>$goods]);
+        return response()->json(['data'=>['goods'=>$goods]]);
     }
 
     /**
@@ -90,7 +92,7 @@ class GoodsController extends Controller
     {
         //编辑指定的内容
         $shop = Goods::find($id);
-        return view('admin.shop.update',["shop"=>$shop]);
+        return view('admin.shop.update',['shop'=>$shop]);
        // echo json_encode($shop);
     }
 
@@ -106,6 +108,9 @@ class GoodsController extends Controller
     {
         $data = $request->all();
         $goods = Goods::find($id);
+        if($goods){
+            return response()->json(['goods'=>"商品不存在，请核实!"]);
+        }
         $goods->name = $data['name'];
         $goods->nickname = $data['nickname'];
         $goods->description = $data['description'];
@@ -114,7 +119,6 @@ class GoodsController extends Controller
         $goods->score = $data['score'];
         $goods->comment = $data['comment'];
         $goods->save();
-
         return response()->json(['update' => '更新成功', 'data' => $goods]);
     }
 
