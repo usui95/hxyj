@@ -17,6 +17,7 @@ Route::resource('photos', 'PhotoController');
 
 /************** 前台路由 **************/
 Route::get('/', 'IndexController@home')->name('home'); // 首页
+Route::get('/ajaxShops', 'IndexController@ajaxShops'); // 首页
 Route::get('/c', 'IndexController@category')->name('category'); // 分类
 Route::resource('goods', 'GoodsController'); // 商品详情页
 
