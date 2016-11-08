@@ -113,7 +113,7 @@
                     url:'/admin/shops/show/edit',
                     type:'get',
                     data:{
-                        _token:$('input[name="_token"]').val(),
+//                        _token:$('input[name="_token"]').val(),
                         id:PUT
                     },
                     dataType:'json',
@@ -153,6 +153,8 @@
         $("#cancel").click(function(){
             $("#put").hide();
         })
+
+
 //        $("#res").on('click','.delete',function(e){
 //           var DELETE=$(this).parent().prevAll().eq(6).html();
 //            $.ajax({
