@@ -22,6 +22,7 @@ Route::resource('goods', 'GoodsController'); // 商品详情页
 
 /************** 后台路由 **************/
 Route::get('/admin/login', 'Admin\SiteController@login'); // 后台登录页面
+Route::post('/admin/doLogin', 'Admin\SiteController@doLogin'); // 后台登录页面
 Route::get('/admin', 'Admin\IndexController@index')->name('admin'); // 后台首页
 Route::resource('/admin/shops', 'Admin\ShopController');
 Route::resource('/admin/goods', 'Admin\GoodsController');
