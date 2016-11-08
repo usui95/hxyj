@@ -108,13 +108,13 @@
     </div>
     <script type="text/javascript">
         $("#res").on('click','.put',function(e){
-            var PUT=$(this).parent().prevAll().eq(6).html();
+            var PuT=$(this).parent().prevAll().eq(6).html();
                 $.ajax({
-                    url:'/admin/shops/show/edit',
+                    url:'/admin/shops',
                     type:'get',
                     data:{
 //                        _token:$('input[name="_token"]').val(),
-                        id:PUT
+                        id:PuT
                     },
                     dataType:'json',
                    success:function(data){

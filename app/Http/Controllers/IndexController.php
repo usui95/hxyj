@@ -7,35 +7,25 @@ use App\Models\Shop;
 use App\Models\Slide;
 use App\Models\GoodsCategory;
 use App\Models\Goods;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class IndexController extends Controller
 {
     public function home()
     {
         // 幻灯片
-        $slides = Slide::simplePaginate(5);
+        $slides = Slide::all();
 
         // 获取九宫格内容
-        $ninePatch = NinePatch::simplePaginate(9);
+        $ninePatch = NinePatch::all();
 
         // 店铺列表
-        $shops = Shop::simplePaginate(10);
+        $shops = Shop::all();
 
         return view('index/home', [
-            'ninePatch' => $ninePatch,
-            'shops' => $shops,
-            'slides' => $slides,
+          'ninePatch' => $ninePatch,
+          'shops' => $shops,
+          'slides' => $slides,
         ]);
-    }
-
-    public function ajaxShops(Request $request) // 首页商户列表
-    {
-        $shops = Shop::where('id', '>', $request->input('id'))->orderBy('id', 'ASC')->limit(10)->get();
-        return response()->json(['msg' => '获取成功', 'data' => [
-            'shops' => $shops,
-        ]]);
     }
 
     public function category()
@@ -82,7 +72,7 @@ class IndexController extends Controller
 
         // 呈现
         return view('index/category', [
-            'categories' => $categories
+          'categories' => $categories
         ]);
     }
 }
