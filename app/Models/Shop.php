@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Shop extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes; // 开启软删除
 
-    protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at']; // 软删除字段
 
-    public $timestamps = false;
+    protected $dateFormat = 'U'; // 时间格式为时间戳
 
+    public $timestamps = false; // 系统不自动维系created_at/updated_at
 }
