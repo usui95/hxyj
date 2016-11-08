@@ -16,11 +16,15 @@ class ShopController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         // 获取列表
-        $shops = Shop::all();
-
+        // $shops = Shop::all();
+        if ($request->input('tel')) {
+            $shops = Shop::where('tel', $request->get('tel'))->simplePaginate(10);
+        } else {
+            $shops = Shop::simplePaginate(10);
+        }
 
         return view('admin.shop.index', [
             'shops' => $shops,
@@ -79,7 +83,10 @@ class ShopController extends Controller
      */
     public function show($id)
     {
-        //
+        $shop = Shop::find($id);
+        return response()->json(['data' => [
+            'shop' => $shop,
+        ]]);
     }
 
     /**
@@ -136,7 +143,6 @@ class ShopController extends Controller
      */
     public function destroy($id)
     {
-
         // 校验商户是否存在
         $shop = Shop::find($id);
         if (empty($shop)) {
@@ -148,5 +154,6 @@ class ShopController extends Controller
 
         // 发送
         return response()->json(['msg' => '删除成功']);
+
     }
 }

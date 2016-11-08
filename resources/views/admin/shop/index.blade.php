@@ -108,6 +108,7 @@
     </div>
     <script type="text/javascript">
         $("#res").on('click','.put',function(e){
+
             var PuT=$(this).parent().prevAll().eq(6).html();
                 $.ajax({
                     url:'/admin/shops',
@@ -127,6 +128,21 @@
                        $("#address").val(data.address);
                    }
                 })
+
+            var PUT=$(this).parent().prevAll().eq(6).html();
+            $.ajax({
+                url:'/admin/shops/show/edit',
+                type:'get',
+                datatype:'json',
+                data:{
+                    _token:$('input[name="_token"]').val(),
+                    id:PUT
+                },
+                success:function(data){
+                    console.log(data);
+                }
+            })
+
             $("#put").show();
         })//点击出现一个隐藏的模态框
         $("#button").click(function (){
@@ -155,6 +171,7 @@
         })
 
 
+
 //        $("#res").on('click','.delete',function(e){
 //           var DELETE=$(this).parent().prevAll().eq(6).html();
 //            $.ajax({
@@ -168,5 +185,18 @@
 //                }
 //            })
 //        })
+        //        $("#res").on('click','.delete',function(e){
+        //           var DELETE=$(this).parent().prevAll().eq(6).html();
+        //            $.ajax({
+        //                url:'',
+        //                type:'post',
+        //                data:{
+        //                    id:DELETE
+        //                },
+        //                success:function(){
+        //                    alert("删除成功");
+        //                }
+        //            })
+        //        })
     </script>
 @endsection
