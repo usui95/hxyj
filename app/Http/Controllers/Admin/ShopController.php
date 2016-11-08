@@ -10,6 +10,10 @@ use App\Models\Shop;
 
 class ShopController extends Controller
 {
+<<<<<<< HEAD
+=======
+
+>>>>>>> eed85126aacd29a1d5b0cb7c986eed2b26fc2cd3
     /**
      * Display a listing of the resource.
      *
