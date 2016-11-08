@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class GoodsDetail extends Model
 {
-    //
+    //商品详情
 }

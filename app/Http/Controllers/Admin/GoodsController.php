@@ -92,7 +92,7 @@ class GoodsController extends Controller
     {
         //编辑指定的内容
         $shop = Goods::find($id);
-        return view('admin.shop.update',['shop'=>$shop]);
+        return view('admin.shop.edit',['shop'=>$shop]);
     }
 
     /**
@@ -117,6 +117,7 @@ class GoodsController extends Controller
         $goods->category = $data['category'];
         $goods->score = $data['score'];
         $goods->comment = $data['comment'];
+        $goods->create_time = time();
         $goods->save();
         return response()->json(['update' => '更新成功', 'data' => $goods]);
     }
