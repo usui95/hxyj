@@ -51,7 +51,7 @@ class GoodsController extends Controller
         //验证商品是否存在
         $goods = Goods::where('id',$data['id'])->first();
         if(isset($goods)){
-            echo response()->json( '商品已存在，无需填添加');
+            return  response()->json( '商品已存在，无需填添加');
         }
         $goods = new Goods();
         $goods->name = $data['name'];
@@ -63,7 +63,7 @@ class GoodsController extends Controller
         $goods->comment = $data['comment'];
         $goods->create_time = time();
         $goods->save();
-            echo resopen()->json(['msg'=>'添加成功','data'=>['goods'=>$goods]]);
+            return resopen()->json(['msg'=>'添加成功','data'=>['goods'=>$goods]]);
 
     }
 
@@ -93,7 +93,6 @@ class GoodsController extends Controller
         //编辑指定的内容
         $shop = Goods::find($id);
         return view('admin.shop.update',['shop'=>$shop]);
-       // echo json_encode($shop);
     }
 
     /**
