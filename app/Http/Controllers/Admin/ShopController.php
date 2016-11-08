@@ -19,7 +19,7 @@ class ShopController extends Controller
     public function index(Request $request)
     {
         // 获取列表
-       // $shops = Shop::all();
+        // $shops = Shop::all();
         if ($request->input('tel')) {
             $shops = Shop::where('tel', $request->get('tel'))->simplePaginate(10);
         } else {
@@ -51,12 +51,14 @@ class ShopController extends Controller
     {
         // 过滤 @todo
         $input = $request->all();
+
         // 校验
         // 校验商户是否已经录入
         $shop = Shop::where('tel', $input['tel'])->where('address', $input['address'])->first();
         if (!empty($shop)) {
             return response()->json(['msg' => '该门店已添加，无需重复添加']);
         }
+
         // 执行
         $shop = new Shop();
         $shop->tel = $input['tel'];
@@ -100,6 +102,7 @@ class ShopController extends Controller
             'shop' => $shop,
         ]);
     }
+
     /**
      * Update the specified resource in storage.
      *

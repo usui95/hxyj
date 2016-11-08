@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Models\Goods;
 use Illuminate\Http\Request;
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -16,14 +18,16 @@ class GoodsController extends Controller
     //商品列表
     public function index(Request $request)
     {
+        //
+
         // 读取数据库
-       // $goods = Goods::all();
+        // $goods = Goods::all();
         if($request->input('name')){
             $goods = Goods::where('name',$request->get('name'))->simplePaginate(10);
         }else{
             $goods = Goods::simplePaginate(10);
         }
-       return view('admin.goods.index',['goods'=>$goods]);
+        return view('admin.goods.index',['goods'=>$goods]);
     }
 
     /**
@@ -33,6 +37,7 @@ class GoodsController extends Controller
      */
     public function create()
     {
+        //
         //新增商品页
         return view('admin.goods.create');
     }
@@ -46,6 +51,7 @@ class GoodsController extends Controller
     //保存方法
     public function store(Request $request)
     {
+        //
         //保存新增数据
         $data = $request->all();
         //验证商品是否存在
@@ -63,11 +69,12 @@ class GoodsController extends Controller
         $goods->comment = $data['comment'];
         $goods->create_time = time();
         $goods->save();
-            return resopen()->json(['msg'=>'添加成功','data'=>['goods'=>$goods]]);
+        return resopen()->json(['msg'=>'添加成功','data'=>['goods'=>$goods]]);
 
     }
 
     /**
+     * Display the specified resource.
      * Display the specified  .
      *
      * @param  int  $id
@@ -76,6 +83,7 @@ class GoodsController extends Controller
 
     public function show($id)
     {
+        //
         //显示选择商品信息
         $goods = Goods::find($id);
         return response()->json(['data'=>['goods'=>$goods]]);
@@ -90,6 +98,7 @@ class GoodsController extends Controller
     //修改信息页
     public function edit($id)
     {
+        //
         //编辑指定的内容
         $shop = Goods::find($id);
         return view('admin.shop.edit',['shop'=>$shop]);
@@ -105,6 +114,7 @@ class GoodsController extends Controller
     //更新方法
     public function update(Request $request, $id)
     {
+        //
         $data = $request->all();
         $goods = Goods::find($id);
         if($goods){
@@ -131,6 +141,7 @@ class GoodsController extends Controller
     //删除商品
     public function destroy($id)
     {
+        //
         $goods = Goods::find($id);
         $goods->delete();
         return response()->json(["del"=>"删除成功"]);
