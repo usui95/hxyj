@@ -98,7 +98,7 @@
                     <td>{{$shop->manager}}</td>
                     <td>{{$shop->tel}}</td>
                     <td>{{$shop->create_time}}</td>
-                    <td>{{$shop->logo}}</td>
+                    <td><img src="{{$shop->logo}}" height="50px"></td>
                     <td>{{$shop->address}}</td>
                     <td>
                         <button type="button" class="put">{{ csrf_field() }}修改</button>

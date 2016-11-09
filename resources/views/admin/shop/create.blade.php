@@ -28,7 +28,7 @@
         </div>
         <div class="form-group">
             <label for="logo">店铺LOGO:</label>
-            <input type="text" required class="form-control" id="logo" placeholder="请输入店铺LOGO">
+            <input type="file" required class="form-control" id="logo">
         </div>
         <div class="form-group">
             <label for="tel">手机号码:</label>
