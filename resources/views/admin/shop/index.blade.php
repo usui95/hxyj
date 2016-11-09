@@ -3,12 +3,14 @@
 @section('content')
 
     <style type="text/css">
-        #put{
-            position: absolute;
+        #put {
+            position: fixed;
             width: 800px;
-            padding:100px;
-            right:15%;
-            background: #efefef;
+            margin: 0 auto;
+            padding: 100px;
+            z-index: 100000;
+            top: 50px;
+            background: #88b5dc;
             display: none;
         }
     </style>
@@ -44,13 +46,13 @@
 
             <div class="form-group">
                 <label for="name1">ID:</label>
-                <input type="text" required class="form-control" id="id1"  value="" disabled>
+                <input type="text" required class="form-control" id="id1" value="" disabled>
             </div>
 
 
             <div class="form-group">
                 <label for="name">店名:</label>
-                <input type="text" required class="form-control" id="name"  placeholder=" 请输入店名">
+                <input type="text" required class="form-control" id="name" placeholder=" 请输入店名">
             </div>
             <div class="form-group">
                 <label for="manager">负责人信息:</label>
@@ -76,8 +78,8 @@
             <button type="button" id="cancel" class="btn btn-default">取消</button>
         </form>
     </div>
-    <div class="container topa" >
-        <table class="table table-striped" id="res" >
+    <div class="container topa">
+        <table class="table table-striped" id="res">
             <tr>
                 <th>店铺ID</th>
                 <th>店名</th>
@@ -107,45 +109,29 @@
         </table>
     </div>
     <script type="text/javascript">
-        $("#res").on('click','.put',function(e){
-
-            var PuT=$(this).parent().prevAll().eq(6).html();
-                $.ajax({
-                    url:'/admin/shops',
-                    type:'get',
-                    data:{
-//                        _token:$('input[name="_token"]').val(),
-                        id:PuT
-                    },
-                    dataType:'json',
-                   success:function(data){
-                        console.log(data);
-                       $("#id1").val(data.id);
-                        $("#name").val(data.name);
-                       $("#manager").val(data.manager);
-                       $("#tel").val(data.tel);
-                       $("#logo").val(data.logo);
-                       $("#address").val(data.address);
-                   }
-                })
-
-            var PUT=$(this).parent().prevAll().eq(6).html();
+        var PuT;
+        var url;
+        $("#res").on('click', '.put', function (e) {
+            url = window.location.href;//获取当前页面的url
+            PuT = $(this).parent().prevAll().eq(6).html();//获取id
+            url = url + "/" + PuT;//把id加入到url地址传递
             $.ajax({
-                url:'/admin/shops/show/edit',
-                type:'get',
-                datatype:'json',
-                data:{
-                    _token:$('input[name="_token"]').val(),
-                    id:PUT
-                },
-                success:function(data){
-                    console.log(data);
+                url: url,
+                type: 'get',
+                dataType: 'json',
+                success: function (data) {
+                    $("#id1").val(data.data.shop.id);
+                    $("#name").val(data.data.shop.name);
+                    $("#manager").val(data.data.shop.manager);
+                    $("#tel").val(data.data.shop.tel);
+                    $("#logo").val(data.data.shop.logo);
+                    $("#address").val(data.data.shop.address);
                 }
             })
-
             $("#put").show();
-        })//点击出现一个隐藏的模态框
-        $("#button").click(function (){
+        })//点击出现一个隐藏的模态框 并且发送请求 取回参数
+        $("#button").click(function () {
+            console.log(PuT);
             var JSon = {
                 _token: $('input[name="_token"]').val(),
                 name: $("#name").val(),
@@ -154,49 +140,38 @@
                 logo: $("#logo").val(),
                 address: $("#address").val()
             }
-
+            console.log(url);
             $.ajax({
-                url:'/admin/shops/update',
-                type:'put',
-                data:JSon,
-                datatype:'json',
-                success:function(data){
-                    console.log(data);
-                    $("#botton").hide();
+                url: url,
+                type: 'put',
+                data: JSon,
+                datatype: 'json',
+                success: function (data) {
+                    alert(data.msg);
+                    $("#put").hide();
+                    window.location.reload();
                 }
             })
         })
-        $("#cancel").click(function(){
+        $("#cancel").click(function () {
             $("#put").hide();
         })
+        $("#res").on('click', '.delete', function (e) {
+            url = window.location.href;//获取当前页面的url
+            PuT = $(this).parent().prevAll().eq(6).html();//获取id
+            url = url + "/" + PuT;//把id加入到url地址传递
+            $.ajax({
+                url: url,
+                type: 'delete',
+                data: {
+                    _token: $("input[name='_token']").val()
+                },
+                success: function (data) {
+                    alert(data.msg);
+                    window.location.reload();
+                }
+            })
+        })//执行删除
 
-
-
-//        $("#res").on('click','.delete',function(e){
-//           var DELETE=$(this).parent().prevAll().eq(6).html();
-//            $.ajax({
-//                url:'',
-//                type:'post',
-//                data:{
-//                    id:DELETE
-//                },
-//                success:function(){
-//                    alert("删除成功");
-//                }
-//            })
-//        })
-        //        $("#res").on('click','.delete',function(e){
-        //           var DELETE=$(this).parent().prevAll().eq(6).html();
-        //            $.ajax({
-        //                url:'',
-        //                type:'post',
-        //                data:{
-        //                    id:DELETE
-        //                },
-        //                success:function(){
-        //                    alert("删除成功");
-        //                }
-        //            })
-        //        })
     </script>
 @endsection
