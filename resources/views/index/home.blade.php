@@ -11,7 +11,8 @@
                 <div class="bd">
                     <ul>
                         <?php foreach($slides as $slide): ?>
-                        <li><a href="<?php echo $slide->url; ?>"><img src="<?php echo $slide->src; ?>"  style="height:auto;"/></a></li>
+                        <li><a href="<?php echo $slide->url; ?>"><img src="<?php echo $slide->src; ?>"
+                                                                      style="height:auto;"/></a></li>
                         <?php endforeach;  ?>
                     </ul>
                 </div>
@@ -101,6 +102,58 @@
             autoPage: true, //自动分页
             switchLoad: "_src" //切换加载，真实图片路径为"_src"
         });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var bool = true;
+            var id = 0;
+            function load() {
+                bool = true
+            };
+            $(window).scroll(function () {
+                var Move = parseFloat($(window).scrollTop());//窗口移动的距离
+                var Window = parseFloat($(window).height()) * 2;//浏览器窗口的高度乘以2
+                var Doct = $(document).height();//浏览器body文档的高度
+
+                if (Doct - Move <= Window && bool == true) {
+                    bool = false;
+
+                    var Id = {
+                        id: id += 10
+                    };
+                    console.log(Id);
+                    var $lists = $(".list");
+                    $.ajax({
+                        url: '/ajaxShops',
+                        type: 'get',
+                        data: Id,
+                        datatype: 'json',
+                        success: function (data) {
+                            console.log(data);
+                            if (data.msg == "获取成功") {
+
+                                data.data.shops.forEach(function (item, index, array) {
+                                    var $section = $("<div></div>").addClass("section").appendTo($lists);
+                                    var $J_linksign = $("<div></div>").addClass("J_linksign-customize").appendTo($section);
+                                    var $item = $("<div></div>").addClass("item").appendTo($J_linksign);
+                                    var $imgd = $("<div></div>").addClass("img").appendTo($item);
+                                    var $img = $('<img/>').attr("src", item.logo).addClass("ico lazy").appendTo($imgd);
+                                    var $info = $("<div></div>").addClass("info").appendTo($item);
+                                    var $name = $("<div></div>").addClass("name").appendTo($info);
+                                    var $namep = $("<p></p>").html(item.name).appendTo($name);
+                                    var $brief = $("<div></div>").addClass("brief").appendTo($info);
+                                    var $briefp = $("<p></p>").html(item.adderss).appendTo($brief);
+                                    var $price = $("<div></div>").addClass("price").appendTo($info);
+                                    var $pricep = $("<p></p>").html(item.tel).appendTo($price);
+                                })
+                                load();
+                            }
+                        }
+                    })
+
+                }
+            });
+        })
     </script>
 @endsection
 

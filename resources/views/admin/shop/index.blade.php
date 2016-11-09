@@ -25,7 +25,7 @@
         </li>
         <li class="active">列表</li>
     </ol>
-    <form class="form-inline" role="form">
+    <form class="form-inline" role="form" >
         <div class="form-group">姓名：
             <label class="sr-only" for="exampleInputEmail2">姓名:</label>
             <input type="text" class="form-control" id="exampleInputEmail2" placeholder="姓名">
@@ -42,7 +42,7 @@
         <button type="button" class="btn btn-success">查询</button>
     </form>
     <div id="put">
-        <form role="form" id="form">
+        <form role="form" id="form" enctype="multipart/form-data">
 
             <div class="form-group">
                 <label for="name1">ID:</label>
