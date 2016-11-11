@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+
 class GoodsController extends Controller
 {
     /**
@@ -19,13 +20,12 @@ class GoodsController extends Controller
     public function index(Request $request)
     {
         // 读取数据库
-        dd(Goods::all());
-//        if($request->input('name')){
-//            $goods = Goods::where('name',$request->get('name'))->simplePaginate(10);
-//        }else{
-//            $goods = Goods::simplePaginate(10);
-//        }
-//        return view('admin.goods.index',['goods'=>$goods]);
+        if($request->input('name')){
+            $goods = Goods::where('name',$request->get('name'))->simplePaginate(10);
+        }else{
+            $goods = Goods::simplePaginate(10);
+        }
+        return view('admin.goods.index',['goods'=>$goods]);
     }
 
     /**
@@ -51,10 +51,11 @@ class GoodsController extends Controller
         //获取新增数据
         $data = $request->all();
         //验证商品是否存在
-        $goods = Goods::where('id',$data['id'])->first();
-        if(isset($goods)){
-            return  response()->json( '商品已存在，无需填添加');
-        }
+//       $goods = Goods::first();
+//        dd($goods);
+//       if(empty($goods)){
+//            return  response()->json(['msg'=> '商品已存在，无需填添加']);
+//        }
         $goods = new Goods();
         $goods->name = $data['name'];
         $goods->nickname = $data['nickname'];
@@ -64,6 +65,7 @@ class GoodsController extends Controller
         $goods->score = $data['score'];
         $goods->comment = $data['comment'];
         $goods->create_time = time();
+   ;
         $goods->save();
         return resopen()->json(['msg'=>'添加成功','data'=>['goods'=>$goods]]);
 

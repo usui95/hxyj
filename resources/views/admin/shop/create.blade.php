@@ -61,7 +61,7 @@
                     success: function (data) {
                         alert(data.msg);
                         $("#form input").val("");
-                        window.location.reload();
+//                        window.location.reload();
                     }
                 })
             }

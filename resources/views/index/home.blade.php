@@ -130,7 +130,7 @@
                         data: Id,
                         datatype: 'json',
                         success: function (data) {
-                            console.log(data);
+//                            console.log(data);
                             if (data.msg == "获取成功") {
                                 if (data.data.shops.length != 0) {
                                     data.data.shops.forEach(function (item, index, array) {

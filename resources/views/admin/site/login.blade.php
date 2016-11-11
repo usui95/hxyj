@@ -176,7 +176,7 @@
             else {
                 var JSon = {
                     tel: $("#tel").val(),
-//                    password: $("#password").val(),
+                    password: $("#password").val(),
                     _token: $("input[name='_token']").val()
                 }
                 $.ajax({
@@ -184,13 +184,25 @@
                     type: 'post',
                     data: JSon,
                     datatype: 'json',
+                    error:function (XMLHttpRequest, textStatus, errorThrown) {
+                        // 通常 textStatus 和 errorThrown 之中
+                        // 只有一个会包含信息
+                        this; // 调用本次AJAX请求时传递的options参数
+                        console.log(XMLHttpRequest);
+                        console.log(textStatus);
+                        console.log(errorThrown);
+                    },
+                    statusCode:{403:function(){
+                        console.log('data');
+                    }},
                     success: function (data,textStatus) {
                         if(data.msg=="用户不存在"){
                             alert("用户不存在,请核实后登录");
                             console.log(textStatus);
                         }
                         else{
-                            window.location.href="/admin";
+//                            window.location.href="/admin";
+                            console.log('ddd');
                         }
                     }
                 })
