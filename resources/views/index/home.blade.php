@@ -107,6 +107,7 @@
         $(document).ready(function () {
             var bool = true;
             var id = 0;
+
             function load() {
                 bool = true
             };
@@ -131,23 +132,38 @@
                         success: function (data) {
                             console.log(data);
                             if (data.msg == "获取成功") {
-
-                                data.data.shops.forEach(function (item, index, array) {
+                                if (data.data.shops.length != 0) {
+                                    data.data.shops.forEach(function (item, index, array) {
+                                        var $section = $("<div></div>").addClass("section").appendTo($lists);
+                                        var $J_linksign = $("<div></div>").addClass("J_linksign-customize").appendTo($section);
+                                        var $item = $("<div></div>").addClass("item").appendTo($J_linksign);
+                                        var $imgd = $("<div></div>").addClass("img").appendTo($item);
+                                        var $img = $('<img/>').attr("src", item.logo).addClass("ico lazy").appendTo($imgd);
+                                        var $info = $("<div></div>").addClass("info").appendTo($item);
+                                        var $name = $("<div></div>").addClass("name").appendTo($info);
+                                        var $namep = $("<p></p>").html(item.name).appendTo($name);
+                                        var $brief = $("<div></div>").addClass("brief").appendTo($info);
+                                        var $briefp = $("<p></p>").html(item.adderss).appendTo($brief);
+                                        var $price = $("<div></div>").addClass("price").appendTo($info);
+                                        var $pricep = $("<p></p>").html(item.tel).appendTo($price);
+                                    })
+                                    load();
+                                }
+                                else if (data.data.shops.length == 0) {
+                                    console.log(data.data.shops.length);
                                     var $section = $("<div></div>").addClass("section").appendTo($lists);
                                     var $J_linksign = $("<div></div>").addClass("J_linksign-customize").appendTo($section);
                                     var $item = $("<div></div>").addClass("item").appendTo($J_linksign);
-                                    var $imgd = $("<div></div>").addClass("img").appendTo($item);
-                                    var $img = $('<img/>').attr("src", item.logo).addClass("ico lazy").appendTo($imgd);
-                                    var $info = $("<div></div>").addClass("info").appendTo($item);
-                                    var $name = $("<div></div>").addClass("name").appendTo($info);
-                                    var $namep = $("<p></p>").html(item.name).appendTo($name);
-                                    var $brief = $("<div></div>").addClass("brief").appendTo($info);
-                                    var $briefp = $("<p></p>").html(item.adderss).appendTo($brief);
-                                    var $price = $("<div></div>").addClass("price").appendTo($info);
-                                    var $pricep = $("<p></p>").html(item.tel).appendTo($price);
-                                })
-                                load();
+                                    var $itemp = $("<p></p>").html("抱歉，没有更多商户信息了").css({
+                                        'text-align': 'center',
+                                        'color': '#666666',
+                                        'width': '100%',
+                                        'font-size': '13px'
+                                    }).appendTo($item);
+                                }
+
                             }
+
                         }
                     })
 
