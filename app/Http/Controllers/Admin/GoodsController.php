@@ -18,16 +18,14 @@ class GoodsController extends Controller
     //商品列表
     public function index(Request $request)
     {
-        //
-
         // 读取数据库
-        // $goods = Goods::all();
-        if($request->input('name')){
-            $goods = Goods::where('name',$request->get('name'))->simplePaginate(10);
-        }else{
-            $goods = Goods::simplePaginate(10);
-        }
-        return view('admin.goods.index',['goods'=>$goods]);
+        dd(Goods::all());
+//        if($request->input('name')){
+//            $goods = Goods::where('name',$request->get('name'))->simplePaginate(10);
+//        }else{
+//            $goods = Goods::simplePaginate(10);
+//        }
+//        return view('admin.goods.index',['goods'=>$goods]);
     }
 
     /**
@@ -37,7 +35,6 @@ class GoodsController extends Controller
      */
     public function create()
     {
-        //
         //新增商品页
         return view('admin.goods.create');
     }
@@ -51,8 +48,7 @@ class GoodsController extends Controller
     //保存方法
     public function store(Request $request)
     {
-        //
-        //保存新增数据
+        //获取新增数据
         $data = $request->all();
         //验证商品是否存在
         $goods = Goods::where('id',$data['id'])->first();
@@ -83,7 +79,6 @@ class GoodsController extends Controller
 
     public function show($id)
     {
-        //
         //显示选择商品信息
         $goods = Goods::find($id);
         return response()->json(['data'=>['goods'=>$goods]]);
@@ -114,7 +109,7 @@ class GoodsController extends Controller
     //更新方法
     public function update(Request $request, $id)
     {
-        //
+        //获取要更新的数据
         $data = $request->all();
         $goods = Goods::find($id);
         if($goods){
@@ -143,7 +138,11 @@ class GoodsController extends Controller
     {
         //
         $goods = Goods::find($id);
+        if(empty($goods)){
+            return response()->json(['goods'=>'要删除的商品不存在，请核查！']);
+        }
         $goods->delete();
+
         return response()->json(["del"=>"删除成功"]);
     }
 }
