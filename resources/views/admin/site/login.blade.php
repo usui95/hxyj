@@ -176,7 +176,7 @@
             else {
                 var JSon = {
                     tel: $("#tel").val(),
-                    password: $("#password").val(),
+//                    password: $("#password").val(),
                     _token: $("input[name='_token']").val()
                 }
                 $.ajax({
@@ -184,9 +184,10 @@
                     type: 'post',
                     data: JSon,
                     datatype: 'json',
-                    success: function (data) {
+                    success: function (data,textStatus) {
                         if(data.msg=="用户不存在"){
                             alert("用户不存在,请核实后登录");
+                            console.log(textStatus);
                         }
                         else{
                             window.location.href="/admin";
