@@ -193,7 +193,10 @@
                         else if (data.msg == "登录成功") {
                             window.location.href = "/admin";
                         }
-                    } 
+                        else{
+                            alert("登录失败");
+                        }
+                    }
                 })
             }
         })
