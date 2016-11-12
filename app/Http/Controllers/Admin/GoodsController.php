@@ -114,7 +114,7 @@ class GoodsController extends Controller
         //获取要更新的数据
         $data = $request->all();
         $goods = Goods::find($id);
-        if($goods){
+        if(empty($goods)){
             return response()->json(['goods'=>"商品不存在，请核实!"]);
         }
         $goods->name = $data['name'];
@@ -126,7 +126,7 @@ class GoodsController extends Controller
         $goods->comment = $data['comment'];
         $goods->create_time = time();
         $goods->save();
-        return response()->json(['update' => '更新成功', 'data' => $goods]);
+        return response()->json(['update' => '更新成功', 'data' => ['goods'=>$goods]]);
     }
 
     /**
