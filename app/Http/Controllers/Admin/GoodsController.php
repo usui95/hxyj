@@ -138,7 +138,7 @@ class GoodsController extends Controller
     //删除商品
     public function destroy($id)
     {
-        //
+        //shanchu
         $goods = Goods::find($id);
         if(empty($goods)){
             return response()->json(['goods'=>'要删除的商品不存在，请核查！']);
