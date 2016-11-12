@@ -20,6 +20,7 @@ class GoodsController extends Controller
     public function index(Request $request)
     {
         // 读取数据库
+        dd(Goods::all());
         if($request->input('name')){
             $goods = Goods::where('name',$request->get('name'))->simplePaginate(10);
         }else{

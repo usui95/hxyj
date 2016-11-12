@@ -19,7 +19,6 @@ class ShopController extends Controller
     public function index(Request $request)
     {
         // 获取列表
-        
         if ($request->input('tel')) {
             $shops = Shop::where('tel', $request->get('tel'))->simplePaginate(10);
         } else {
