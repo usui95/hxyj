@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <ol class="breadcrumb">
+    <ol class="breadcrumb" style="background: #5e87ab;">
         <li>
             <a href="#">首页</a>
         </li>
