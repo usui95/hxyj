@@ -20,7 +20,8 @@ class GoodsController extends Controller
     public function index(Request $request)
     {
         // 读取数据库
-        dd(Goods::all());
+
+       
         if($request->input('name')){
             $goods = Goods::where('name',$request->get('name'))->simplePaginate(10);
         }else{
@@ -52,11 +53,11 @@ class GoodsController extends Controller
         //获取新增数据
         $data = $request->all();
         //验证商品是否存在
-//       $goods = Goods::first();
-//        dd($goods);
-//       if(empty($goods)){
-//            return  response()->json(['msg'=> '商品已存在，无需填添加']);
-//        }
+        $goods = Goods::where('name', $data['name'])->where('nickname', $data['nickname'])->first();
+        if (!empty($goods)) {
+            return response()->json(['msg' => '该商品已添加，无需重复添加']);
+        }
+        //添加
         $goods = new Goods();
         $goods->name = $data['name'];
         $goods->nickname = $data['nickname'];
@@ -66,10 +67,10 @@ class GoodsController extends Controller
         $goods->score = $data['score'];
         $goods->comment = $data['comment'];
         $goods->create_time = time();
-   ;
         $goods->save();
-        return resopen()->json(['msg'=>'添加成功','data'=>['goods'=>$goods]]);
-
+        return response()->json(['msg' => '添加成功', 'data' => [
+            'goods' => $goods
+        ]]);
     }
 
     /**
