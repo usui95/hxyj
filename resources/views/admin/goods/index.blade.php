@@ -44,7 +44,7 @@
                 <td>{{$goodsq->description}}</td>
                 <td>{{$goodsq->price}}</td>
                 <td>{{$goodsq->category}}</td>
-                <td><img src="{{$goodsq->score}}" height="50px"></td>
+                <td>{{$goodsq->score}}</td>
                 <td>{{$goodsq->comment}}</td>
                 <td>{{$goodsq->create_time}}</td>
                 <td>
