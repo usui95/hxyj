@@ -48,8 +48,8 @@
                 <td>{{$goodsq->comment}}</td>
                 <td>{{$goodsq->create_time}}</td>
                 <td>
-                    <button type="button" class="put">{{ csrf_field() }}修改</button>
-                    <button type="button" class="delete">删除</button>
+                    <button type="button" class="put btn btn-success">{{ csrf_field() }}修改</button>
+                    <button type="button" class="delete btn btn-danger">删除</button>
                 </td>
             </tr>
         @endforeach
@@ -90,11 +90,11 @@
                 <label for="comment">商品评价:</label>
                 <input type="text" class="form-control" id="comment" placeholder=" 请输入商品评价" />
             </div>
-            <button type="button" id="button" class="btn btn-default">确定修改</button>
+            <button type="button" id="button" class="btn btn-default btn-success">确定修改</button>
             &nbsp;&nbsp;
-            <button type="reset" class="btn btn-default">重置</button>
+            <button type="reset" class="btn btn-default btn-danger">重置</button>
 
-            <button type="button" id="cancel" class="btn btn-default">取消</button>
+            <button type="button" id="cancel" class="btn btn-default btn-warning">取消</button>
         </form>
     </div>
 

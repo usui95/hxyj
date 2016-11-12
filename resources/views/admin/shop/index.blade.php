@@ -71,11 +71,11 @@
                 <label for="tel">手机号码:</label>
                 <input type="tel" required class="form-control" id="tel" placeholder="请输入联系信息">
             </div>
-            <button type="button" id="button" class="btn btn-default">确定修改</button>
+            <button type="button" id="button" class="btn btn-default btn-success">确定修改</button>
             &nbsp;&nbsp;
-            <button type="reset" class="btn btn-default">重置</button>
+            <button type="reset" class="btn btn-default btn-danger">重置</button>
 
-            <button type="button" id="cancel" class="btn btn-default">取消</button>
+            <button type="button" id="cancel" class="btn btn-default btn-warning">取消</button>
         </form>
     </div>
     <div class="container topa">
@@ -101,8 +101,8 @@
                     <td><img src="{{$shop->logo}}" height="50px"></td>
                     <td>{{$shop->address}}</td>
                     <td>
-                        <button type="button" class="put">{{ csrf_field() }}修改</button>
-                        <button type="button" class="delete">删除</button>
+                        <button type="button" class="put btn btn-success">{{ csrf_field() }}修改</button>
+                        <button type="button" class="delete btn btn-danger">删除</button>
                     </td>
                 </tr>
             @endforeach

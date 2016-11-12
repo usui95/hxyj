@@ -34,9 +34,9 @@
             <label for="tel">手机号码:</label>
             <input type="tel" required class="form-control" id="tel" placeholder="请输入联系信息">
         </div>
-        <button type="button" id="submit" class="btn btn-default">提交</button>
+        <button type="button" id="submit" class="btn btn-default btn-success">提交</button>
         &nbsp;&nbsp;
-        <button type="reset" class="btn btn-default">重置</button>
+        <button type="reset" class="btn btn-default btn-danger">重置</button>
     </form>
     <script type="text/javascript">
         $('#submit').click(function () {
