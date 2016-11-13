@@ -107,6 +107,7 @@
                 </tr>
             @endforeach
         </table>
+        {{$shops->links()}}
     </div>
     <script type="text/javascript">
         var PuT;
