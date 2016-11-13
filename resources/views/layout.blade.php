@@ -7,6 +7,7 @@
     <meta name="description" content="{{ config('app.description') }}">
     <meta name="keywords" content="{{ config('app.keywords') }}">
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <script type="text/javascript" src="/js/admin/jquery-3.1.0.js"></script>
     @section('css')
     <link rel="stylesheet" href="{{ elixir('css/index.css') }}">
     @show

@@ -160,8 +160,6 @@
         </div>
     </div>
 </div>
-
-
 </body>
 <script type="text/javascript" src="/js/admin/bootstrap.min.js"></script>
 <script type="text/javascript">
@@ -176,28 +174,33 @@
             else {
                 var JSon = {
                     tel: $("#tel").val(),
+                    _token: $("input[name='_token']").val(),
                     password: $("#password").val(),
-                    _token: $("input[name='_token']").val()
-                }
+                };
                 $.ajax({
                     url: '/admin/doLogin',
                     type: 'post',
                     data: JSon,
                     datatype: 'json',
-                    success: function (data) {
-                        if(data.msg=="用户不存在"){
+                    success: function (data, textStatus) {
+                        console.log(data);
+                        if (data.msg == "用户不存在") {
                             alert("用户不存在,请核实后登录");
                         }
+                        else if (data.msg == "密码错误") {
+                            alert("密码错误,请注意大小写");
+                        }
+                        else if (data.msg == "登录成功") {
+                            window.location.href = "/admin";
+                        }
                         else{
-                            window.location.href="/admin";
+                            alert("登录失败"); 
                         }
                     }
                 })
             }
         })
     })
-
-
 </script>
 </html>
 

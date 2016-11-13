@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+
 class GoodsController extends Controller
 {
     /**
@@ -18,10 +19,7 @@ class GoodsController extends Controller
     //商品列表
     public function index(Request $request)
     {
-        //
-
         // 读取数据库
-        // $goods = Goods::all();
         if($request->input('name')){
             $goods = Goods::where('name',$request->get('name'))->simplePaginate(10);
         }else{
@@ -37,7 +35,6 @@ class GoodsController extends Controller
      */
     public function create()
     {
-        //
         //新增商品页
         return view('admin.goods.create');
     }
@@ -51,14 +48,14 @@ class GoodsController extends Controller
     //保存方法
     public function store(Request $request)
     {
-        //
-        //保存新增数据
+        //获取新增数据
         $data = $request->all();
         //验证商品是否存在
-        $goods = Goods::where('id',$data['id'])->first();
-        if(isset($goods)){
-            return  response()->json( '商品已存在，无需填添加');
+        $goods = Goods::where('name', $data['name'])->where('nickname', $data['nickname'])->first();
+        if (!empty($goods)) {
+            return response()->json(['msg' => '该商品已添加，无需重复添加']);
         }
+        //添加
         $goods = new Goods();
         $goods->name = $data['name'];
         $goods->nickname = $data['nickname'];
@@ -69,8 +66,9 @@ class GoodsController extends Controller
         $goods->comment = $data['comment'];
         $goods->create_time = time();
         $goods->save();
-        return resopen()->json(['msg'=>'添加成功','data'=>['goods'=>$goods]]);
-
+        return response()->json(['msg' => '添加成功', 'data' => [
+            'goods' => $goods
+        ]]);
     }
 
     /**
@@ -83,7 +81,6 @@ class GoodsController extends Controller
 
     public function show($id)
     {
-        //
         //显示选择商品信息
         $goods = Goods::find($id);
         return response()->json(['data'=>['goods'=>$goods]]);
@@ -101,7 +98,7 @@ class GoodsController extends Controller
         //
         //编辑指定的内容
         $shop = Goods::find($id);
-        return view('admin.shop.update',['shop'=>$shop]);
+        return view('admin.shop.edit',['shop'=>$shop]);
     }
 
     /**
@@ -114,10 +111,10 @@ class GoodsController extends Controller
     //更新方法
     public function update(Request $request, $id)
     {
-        //
+        //获取要更新的数据
         $data = $request->all();
         $goods = Goods::find($id);
-        if($goods){
+        if(empty($goods)){
             return response()->json(['goods'=>"商品不存在，请核实!"]);
         }
         $goods->name = $data['name'];
@@ -127,8 +124,9 @@ class GoodsController extends Controller
         $goods->category = $data['category'];
         $goods->score = $data['score'];
         $goods->comment = $data['comment'];
+        $goods->create_time = time();
         $goods->save();
-        return response()->json(['update' => '更新成功', 'data' => $goods]);
+        return response()->json(['update' => '更新成功', 'data' => ['goods'=>$goods]]);
     }
 
     /**
@@ -140,9 +138,13 @@ class GoodsController extends Controller
     //删除商品
     public function destroy($id)
     {
-        //
+        //shanchu
         $goods = Goods::find($id);
+        if(empty($goods)){
+            return response()->json(['goods'=>'要删除的商品不存在，请核查！']);
+        }
         $goods->delete();
+
         return response()->json(["del"=>"删除成功"]);
     }
 }

@@ -10,6 +10,7 @@ class Goods extends Model
     const CATEGORY_CIGARETTE = 1; // 香烟
     const CATEGORY_WINE = 2; // 白酒
     const CATEGORY_RED_WINE = 3; // 红酒
+    public $timestamps = false;
 
     public function goodsScore()
     {

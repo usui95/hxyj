@@ -50,7 +50,6 @@ class ShopController extends Controller
     {
         // 过滤 @todo
         $input = $request->all();
-
         // 校验
         // 校验商户是否已经录入
         $shop = Shop::where('tel', $input['tel'])->where('address', $input['address'])->first();
@@ -67,7 +66,6 @@ class ShopController extends Controller
         $shop->logo = $input['logo'];
         $shop->create_time = time();
         $shop->save();
-
         // 发送
         return response()->json(['msg' => '添加成功', 'data' => [
             'shop' => $shop
