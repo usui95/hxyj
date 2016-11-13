@@ -20,12 +20,12 @@ class GoodsController extends Controller
     public function index(Request $request)
     {
         // 读取数据库
-        if($request->input('name')){
-            $goods = Goods::where('name',$request->get('name'))->simplePaginate(10);
-        }else{
+        if ($request->input('name')) {
+            $goods = Goods::where('name', $request->get('name'))->simplePaginate(10);
+        } else {
             $goods = Goods::simplePaginate(10);
         }
-        return view('admin.goods.index',['goods'=>$goods]);
+        return view('admin.goods.index', ['goods' => $goods]);
     }
 
     /**
@@ -42,7 +42,7 @@ class GoodsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     //保存方法
@@ -75,7 +75,7 @@ class GoodsController extends Controller
      * Display the specified resource.
      * Display the specified  .
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
 
@@ -83,13 +83,13 @@ class GoodsController extends Controller
     {
         //显示选择商品信息
         $goods = Goods::find($id);
-        return response()->json(['data'=>['goods'=>$goods]]);
+        return response()->json(['data' => ['goods' => $goods]]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     //修改信息页
@@ -98,14 +98,14 @@ class GoodsController extends Controller
         //
         //编辑指定的内容
         $shop = Goods::find($id);
-        return view('admin.shop.edit',['shop'=>$shop]);
+        return view('admin.shop.edit', ['shop' => $shop]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     //更新方法
@@ -114,8 +114,8 @@ class GoodsController extends Controller
         //获取要更新的数据
         $data = $request->all();
         $goods = Goods::find($id);
-        if(empty($goods)){
-            return response()->json(['goods'=>"商品不存在，请核实!"]);
+        if (empty($goods)) {
+            return response()->json(['goods' => "商品不存在，请核实!"]);
         }
         $goods->name = $data['name'];
         $goods->nickname = $data['nickname'];
@@ -126,13 +126,13 @@ class GoodsController extends Controller
         $goods->comment = $data['comment'];
         $goods->create_time = time();
         $goods->save();
-        return response()->json(['update' => '更新成功', 'data' => ['goods'=>$goods]]);
+        return response()->json(['update' => '更新成功', 'data' => ['goods' => $goods]]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     //删除商品
@@ -140,11 +140,11 @@ class GoodsController extends Controller
     {
         //shanchu
         $goods = Goods::find($id);
-        if(empty($goods)){
-            return response()->json(['goods'=>'要删除的商品不存在，请核查！']);
+        if (empty($goods)) {
+            return response()->json(['goods' => '要删除的商品不存在，请核查！']);
         }
         $goods->delete();
 
-        return response()->json(["del"=>"删除成功"]);
+        return response()->json(["del" => "删除成功"]);
     }
 }
