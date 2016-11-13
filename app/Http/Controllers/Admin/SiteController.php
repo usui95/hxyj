@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Schema;
 
 class SiteController extends Controller
 {
@@ -20,12 +21,12 @@ class SiteController extends Controller
         // 用户是否存在
         $admin = Admin::where('tel', $input['tel'])->first();
         if (empty($admin)) {
-            return response()->json(['msg' => '用户不存在']);
+            return response()->json(['msg' => '用户不存在'], 403);
         }
 
         // 用户密码是否存在
         if (!$admin->isPasswordMatched($input['password'])) {
-            return response()->json(['msg' => '密码错误']);
+            return response()->json(['msg' => '密码错误'], 403);
         }
 
         // 执行

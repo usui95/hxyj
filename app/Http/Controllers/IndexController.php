@@ -6,9 +6,7 @@ use App\Models\NinePatch;
 use App\Models\Shop;
 use App\Models\Slide;
 use App\Models\GoodsCategory;
-use App\Models\Goods;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class IndexController extends Controller
 {
