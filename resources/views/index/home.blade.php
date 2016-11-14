@@ -74,7 +74,7 @@
                                 <?php endif; ?>
                             </div>
                             <div class="info">
-                                <div class="name"><p><?php echo $shop->name; ?>22</p></div>
+                                <div class="name"><p><?php echo $shop->name; ?></p></div>
                                 <div class="brief"><p><?php echo $shop->address; ?></p></div>
                                 <div class="price"><p><?php echo $shop->tel; ?></p></div>
                             </div>
