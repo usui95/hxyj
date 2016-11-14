@@ -106,8 +106,8 @@
     <script type="text/javascript">
         $(document).ready(function () {
             var bool = true;
-            var id = 0;
-
+            var lastId =0;//获取最后一个id的数值
+            var length = null;//获取传回数据的长度
             function load() {
                 bool = true
             };
@@ -118,11 +118,10 @@
 
                 if (Doct - Move <= Window && bool == true) {
                     bool = false;
-
                     var Id = {
-                        id: id += 10
+                        id: lastId
                     };
-                    console.log(Id);
+//                    console.log('传出去的id'+lastId);
                     var $lists = $(".list");
                     $.ajax({
                         url: '/ajaxShops',
@@ -146,11 +145,14 @@
                                         var $briefp = $("<p></p>").html(item.adderss).appendTo($brief);
                                         var $price = $("<div></div>").addClass("price").appendTo($info);
                                         var $pricep = $("<p></p>").html(item.tel).appendTo($price);
-                                    })
+                                    });
+                                    length = data.data.shops.length - 1;
+//                                    console.log('传回的数组最后一个的数值'+length);
+                                    lastId = data.data.shops[length].id;
+//                                    console.log('最后一个数据的id'+lastId);
                                     load();
                                 }
                                 else if (data.data.shops.length == 0) {
-                                    console.log(data.data.shops.length);
                                     var $section = $("<div></div>").addClass("section").appendTo($lists);
                                     var $J_linksign = $("<div></div>").addClass("J_linksign-customize").appendTo($section);
                                     var $item = $("<div></div>").addClass("item").appendTo($J_linksign);

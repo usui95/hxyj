@@ -95,7 +95,6 @@ class GoodsController extends Controller
     //修改信息页
     public function edit($id)
     {
-        //
         //编辑指定的内容
         $shop = Goods::find($id);
         return view('admin.shop.edit',['shop'=>$shop]);
