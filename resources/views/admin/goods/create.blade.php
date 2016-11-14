@@ -6,9 +6,9 @@
         </li>
 
         <li>
-            <a href="#">商户管理</a>
+            <a href="#">商品管理</a>
         </li>
-        <li class="active">新增</li>
+        <li class="active">商品新增</li>
     </ol>
     <form role="form" id="form">
         {{ csrf_field() }}

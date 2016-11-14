@@ -105,9 +105,9 @@
     </script>
     <script type="text/javascript">
         $(document).ready(function () {
-
+           var da =$(".list .section:last(1) .J_linksign-customize .item").attr('data-id');//获取第一次id的值
             var bool = true;
-            var lastId =0;//获取最后一个id的数值
+             var lastId =da;//获取最后一个id的数值
             var length = null;//获取传回数据的长度
             function load() {
                 bool = true
@@ -122,7 +122,6 @@
                     var Id = {
                         id: lastId
                     };
-//                    console.log('传出去的id'+lastId);
                     var $lists = $(".list");
                     $.ajax({
                         url: '/ajaxShops',
@@ -148,9 +147,7 @@
                                         var $pricep = $("<p></p>").html(item.tel).appendTo($price);
                                     });
                                     length = data.data.shops.length - 1;
-//                                    console.log('传回的数组最后一个的数值'+length);
                                     lastId = data.data.shops[length].id;
-//                                    console.log('最后一个数据的id'+lastId);
                                     load();
                                 }
                                 else if (data.data.shops.length == 0) {

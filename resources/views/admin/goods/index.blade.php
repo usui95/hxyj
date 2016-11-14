@@ -18,9 +18,9 @@
         </li>
 
         <li>
-            <a href="#">商户管理</a>
+            <a href="#">商品管理</a>
         </li>
-        <li class="active">列表</li>
+        <li class="active">商品列表</li>
     </ol>
     <table class="table table-striped" id="res">
         <tr>
