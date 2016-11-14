@@ -65,7 +65,7 @@
                 <?php foreach ($shops as $shop): ?>
                 <div class="section"><!--vue-if-->
                     <div class="J_linksign-customize">
-                        <div class="item">
+                        <div class="item" data-id="<?php echo $shop->id ?>">
                             <div class="img">
                                 <img class="ico lazy" src="<?php echo $shop->logo ?>"
                                      style="transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);">
