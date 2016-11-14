@@ -105,6 +105,7 @@
     </script>
     <script type="text/javascript">
         $(document).ready(function () {
+
             var bool = true;
             var lastId =0;//获取最后一个id的数值
             var length = null;//获取传回数据的长度

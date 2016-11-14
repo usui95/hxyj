@@ -113,9 +113,8 @@
         var PuT;
         var url;
         $("#res").on('click', '.put', function (e) {
-            url = window.location.href;//获取当前页面的url
             PuT = $(this).parent().prevAll().eq(6).html();//获取id
-            url = url + "/" + PuT;//把id加入到url地址传递
+            url = '/admin/shops' + "/" + PuT;//把id加入到url地址传递
             $.ajax({
                 url: url,
                 type: 'get',
@@ -158,9 +157,8 @@
             $("#put").hide();
         })
         $("#res").on('click', '.delete', function (e) {
-            url = window.location.href;//获取当前页面的url
             PuT = $(this).parent().prevAll().eq(6).html();//获取id
-            url = url + "/" + PuT;//把id加入到url地址传递
+            url = "/admin/shops" + "/" + PuT;//把id加入到url地址传递
             $.ajax({
                 url: url,
                 type: 'delete',
