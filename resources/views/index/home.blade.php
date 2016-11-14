@@ -65,7 +65,7 @@
                 <?php foreach ($shops as $shop): ?>
                 <div class="section"><!--vue-if-->
                     <div class="J_linksign-customize">
-                        <div class="item">
+                        <div class="item" data-id="<?php echo $shop->id ?>">
                             <div class="img">
                                 <img class="ico lazy" src="<?php echo $shop->logo ?>"
                                      style="transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);">
@@ -74,7 +74,7 @@
                                 <?php endif; ?>
                             </div>
                             <div class="info">
-                                <div class="name"><p><?php echo $shop->name; ?>22</p></div>
+                                <div class="name"><p><?php echo $shop->name; ?></p></div>
                                 <div class="brief"><p><?php echo $shop->address; ?></p></div>
                                 <div class="price"><p><?php echo $shop->tel; ?></p></div>
                             </div>
