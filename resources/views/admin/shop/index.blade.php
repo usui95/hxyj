@@ -43,21 +43,13 @@
         </li>
         <li class="active">列表</li>
     </ol>
-    <form class="form-inline" role="form" >
-        <div class="form-group">姓名：
-            <label class="sr-only" for="exampleInputEmail2">姓名:</label>
-            <input type="text" class="form-control" id="exampleInputEmail2" placeholder="姓名">
+    <form class="form-inline" role="form" method="get">
+        {{ csrf_field() }}
+        <div class="form-group">手机号码：
+            <label class="sr-only" for="exampleInputPassword2">手机号码:</label>
+            <input type="tel" class="form-control" name="tel" id="exampleInputPassword2" placeholder="查询手机号码">
         </div>
-        <div class="form-group">创建日期：
-            <div class="input-group">
-                <input class="form-control" type="date" placeholder="日期">
-            </div>
-        </div>
-        <div class="form-group">职位：
-            <label class="sr-only" for="exampleInputPassword2">职位:</label>
-            <input type="text" class="form-control" id="exampleInputPassword2" placeholder="查询职位">
-        </div>
-        <button type="button" class="btn btn-success">查询</button>
+        <button type="submit" class="btn btn-success">查询</button>
     </form>
     <div id="put">
         <form role="form" id="form" enctype="multipart/form-data">
