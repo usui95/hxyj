@@ -10,7 +10,7 @@ class Goods extends Model
     const CATEGORY_CIGARETTE = 1; // 香烟
     const CATEGORY_WINE = 2; // 白酒
     const CATEGORY_RED_WINE = 3; // 红酒
-    public $timestamps = false;//设置不自动维系create_at和update_at字段
+    public $timestamps = false;//设置不自动维系created_at和updated_at字段
 
     public function goodsScore()
     {
