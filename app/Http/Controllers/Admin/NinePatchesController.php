@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\NinePatch;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -16,7 +17,9 @@ class NinePatchesController extends Controller
      */
     public function index()
     {
-        //
+        //主页
+        $ninePatch = NinePatch::all();
+        return view('admin.NinePatch.index', ['ninePatch' => $ninePatch]);
     }
 
     /**
@@ -26,62 +29,106 @@ class NinePatchesController extends Controller
      */
     public function create()
     {
-        //
+        //新增
+        return view('admin.NinePatch.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        //保存新增数据
+        $data = $request->all();
+        //判断
+        $ninePatch = NinePatch::where('name', $data['name'])->first();
+        if (!empty($ninePatch)) {
+            return response()->jspn(['msg' => '已存在，无需重复添加']);
+        }
+        $ninePatch = new NinePatch();
+        $ninePatch->name = $data['name'];
+        $ninePatch->thumb = $data['thumb'];
+        $ninePatch->url = $data['url'];
+        $ninePatch->weight = $data['weight'];
+        $ninePatch->create_time = time();
+        //保存
+        $ninePatch->save();
+        //推送
+        return response()->json(['msg' => '保存成功', 'data' => [
+            'nicePatch' => $ninePatch]]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+        $ninePatch = NinePatch::find($id);
+        return response()->json(['data' => ['ninePatch' => $ninePatch]]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
+        //更新
+        $ninePatch = NinePatch::find($id);
+        return view('admin.NinePatch.edit', ['ninePatch' => $ninePatch]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
+        //保存更新的数据
+        $data = $request->all();
+        //判断
+        $nicePatch = NinePatch::find($id);
+        if (empty($nicePatch)) {
+            return response()->json(['msg' => '您要更新的不存在，请核实！']);
+        }
+        $nicePatch->name = $data['name'];
+        $nicePatch->thumb = $data['thumb'];
+        $nicePatch->url = $data['url'];
+        $nicePatch->weight = $data['weight'];
+        $nicePatch->create_time = time();
+        //保存
+        $nicePatch->save();
+        //推送
+        return response()->json(['msg' => '更新成功', 'data' => ['ninePatch' => $nicePatch]]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        //删除
+        $ninePatch = NinePatch::find($id);
+        //判断
+        if (empty($ninePatch)) {
+            return response()->json(['msg' => '不存在，请重新核实']);
+        }
+        $ninePatch->delete();
+        //推送
+        return response()->json(['msg' => '删除成功']);
     }
 }
