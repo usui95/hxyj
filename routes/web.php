@@ -27,7 +27,7 @@ Route::post('/admin/doLogin', 'Admin\SiteController@doLogin'); // 后台登录�
 Route::get('/admin', 'Admin\IndexController@index')->name('admin'); // 后台首页
 Route::resource('/admin/shops', 'Admin\ShopController');
 Route::resource('/admin/goods', 'Admin\GoodsController');
-Route::resource('/admin/goodsCategory', 'Admin\GoodsCategoryController');
+Route::resource('/admin/goodsCategories', 'Admin\GoodsCategoryController');
 
 //Route::get('/', function () {
 //    return view('welcome');
