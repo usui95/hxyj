@@ -3,10 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class GoodsCategory extends Model
 {
-    //商品分类
 
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
+    protected $dateFormat = 'U';
 
 }
