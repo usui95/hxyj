@@ -29,7 +29,7 @@ Route::resource('/admin/shops', 'Admin\ShopController');
 Route::resource('/admin/goods', 'Admin\GoodsController');
 Route::resource('/admin/goodsCategory', 'Admin\GoodsCategoryController');
 Route::resource('/admin/goodsCategories', 'Admin\GoodsCategoryController');
-Route::resource('/admin/NinePatch', 'Admin\NinePatchesController');
+Route::resource('/admin/ninePatch', 'Admin\NinePatchesController');
 
 
 //Route::get('/', function () {

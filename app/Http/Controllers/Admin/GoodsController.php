@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Goods;
+use App\Models\NinePatch;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -114,7 +115,11 @@ class GoodsController extends Controller
         $data = $request->all();
         $goods = Goods::find($id);
         if (empty($goods)) {
-            return response()->json(['goods' => "商品不存在，请核实!"]);
+            return response()->json(['msg' => "商品不存在，请核实!"]);
+        }
+        $name = Goods::where('name',$data['name'])->first();
+        if(!empty($name)){
+            return response() -> json(['msg'=> '名字重复，请重新命名!']);
         }
         $goods->name = $data['name'];
         $goods->nickname = $data['nickname'];
@@ -125,7 +130,7 @@ class GoodsController extends Controller
         $goods->comment = $data['comment'];
         $goods->create_time = time();
         $goods->save();
-        return response()->json(['update' => '更新成功', 'data' => ['goods' => $goods]]);
+        return response()->json(['msg' => '更新成功', 'data' => ['goods' => $goods]]);
     }
 
     /**

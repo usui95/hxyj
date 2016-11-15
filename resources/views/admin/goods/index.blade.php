@@ -70,10 +70,10 @@
                     <button type="button" class="put btn btn-success">{{ csrf_field() }}修改</button>
                     <button type="button" class="delete btn btn-danger">删除</button>
                 </td>
+
             </tr>
         @endforeach
     </table>
-    {{$goods->links()}}
     </div>
 
     <div id="put">
@@ -166,7 +166,7 @@
                 data: Json,
                 datatype: 'json',
                 success: function (data) {
-                    alert(data.update);
+                    alert(data.msg);
                     $("#put").hide();
                     window.location.reload();
                 }

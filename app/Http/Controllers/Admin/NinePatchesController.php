@@ -15,11 +15,15 @@ class NinePatchesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //主页
-        $ninePatch = NinePatch::all();
-        return view('admin.NinePatch.index', ['ninePatch' => $ninePatch]);
+        if ($request->input('name')) {
+            $ninePatch = NinePatch::where('name', $request->get('name'))->simplePaginate(10);
+        } else {
+            $ninePatch = NinePatch::simplePaginate(10);
+        }
+        return view('admin.nine_patch.index', ['ninepatch' => $ninePatch]);
     }
 
     /**
@@ -29,8 +33,8 @@ class NinePatchesController extends Controller
      */
     public function create()
     {
-        //新增
-        return view('admin.NinePatch.create');
+        //新增页面
+        return view('admin.nine_patch.create');
     }
 
     /**
@@ -57,8 +61,7 @@ class NinePatchesController extends Controller
         //保存
         $ninePatch->save();
         //推送
-        return response()->json(['msg' => '保存成功', 'data' => [
-            'nicePatch' => $ninePatch]]);
+        return response()->json(['msg' => '保存成功', 'data' => ['nicePatch' => $ninePatch]]);
     }
 
     /**
@@ -83,7 +86,7 @@ class NinePatchesController extends Controller
     {
         //更新
         $ninePatch = NinePatch::find($id);
-        return view('admin.NinePatch.edit', ['ninePatch' => $ninePatch]);
+        return view('admin.nine_Patch.edit', ['ninePatch' => $ninePatch]);
     }
 
     /**
@@ -101,6 +104,11 @@ class NinePatchesController extends Controller
         $nicePatch = NinePatch::find($id);
         if (empty($nicePatch)) {
             return response()->json(['msg' => '您要更新的不存在，请核实！']);
+        }
+        //判断更新后名字是否有相同
+        $name = NinePatch::where('name', $data['name'])->first();
+        if (!empty($name)) {
+            return response()->json(['msg' => '名字已存在，请重新命名!']);
         }
         $nicePatch->name = $data['name'];
         $nicePatch->thumb = $data['thumb'];
