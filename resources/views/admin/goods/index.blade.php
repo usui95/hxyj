@@ -11,6 +11,25 @@
             background: #88b5dc;
             display: none;
         }
+
+        #del {
+            position: fixed;
+            background: #efefef;
+            top: 50%;
+            left: 50%;
+            margin-top: -101px;
+            margin-left: -217px;
+            text-align: center;
+            display: none;
+            padding:70px;
+            border: 8px solid #ff0000;
+        }
+
+        h2 {
+            text-align: left;
+            font-size: 15px;
+            font-weight: 800;
+        }
     </style>
     <ol class="breadcrumb" style="background: #5e87ab;">
         <li>
@@ -98,7 +117,12 @@
         </form>
     </div>
 
+    <div id="del">
+        <h2>提示：删除后将无法恢复</h2>
+        <button type="button" id="canc" class="btn-success btn">&nbsp;取消&nbsp;</button>
 
+        <button type="button" id="confirm" class="btn-danger btn">确定删除</button>
+    </div>
 
     <script type="text/javascript">
         var PuT;
@@ -141,18 +165,20 @@
                 data: Json,
                 datatype: 'json',
                 success: function (data) {
-                   alert(data.update);
+                    alert(data.update);
                     $("#put").hide();
                     window.location.reload();
                 }
             });
         });
-        $("#cancel").click(function () {
-            $("#put").hide();
-        });
+
+        var PT = null;
         $("#res").on('click', '.delete', function (e) {
-            PuT = $(this).parent().prevAll().eq(8).html();//获取id
-            url = '/admin/goods' + "/" + PuT;//把id加入到url地址传递
+            $("#del").show();
+            PT = $(this).parent().prevAll().eq(8).html();//获取id
+        });
+        $("#confirm").click(function () {
+            url = '/admin/goods' + "/" + PT;//把id加入到url地址传递
             $.ajax({
                 url: url,
                 type: 'delete',
@@ -161,10 +187,18 @@
                 },
                 success: function (data) {
                     alert(data.del);
+                    $("#del").hide();
                     window.location.reload();
                 }
             });
         });
+        $("#canc").click(function () {
+            $("#del").hide();
+        });
+        $("#cancel").click(function () {
+            $("#put").hide();
+        });
+
         //执行删除
     </script>
 
