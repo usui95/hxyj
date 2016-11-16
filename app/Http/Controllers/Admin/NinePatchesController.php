@@ -73,6 +73,9 @@ class NinePatchesController extends Controller
     public function show($id)
     {
         $ninePatch = NinePatch::find($id);
+        if (empty($ninePatch)) {
+            return response()->json(['msg' => '九宫格不存在！'], 403);
+        }
         return response()->json(['data' => ['ninePatch' => $ninePatch]]);
     }
 
@@ -86,7 +89,10 @@ class NinePatchesController extends Controller
     {
         //更新
         $ninePatch = NinePatch::find($id);
-        return view('admin.nine_Patch.edit', ['ninePatch' => $ninePatch]);
+        if (empty($ninePatch)) {
+            return response()->json(['msg' => '九宫格不存在！'], 403);
+        }
+        return response()->json(['data' => ['ninePatch' => $ninePatch]]);
     }
 
     /**
@@ -110,6 +116,7 @@ class NinePatchesController extends Controller
         if (!empty($name)) {
             return response()->json(['msg' => '名字已存在，请重新命名!']);
         }
+
         $nicePatch->name = $data['name'];
         $nicePatch->thumb = $data['thumb'];
         $nicePatch->url = $data['url'];

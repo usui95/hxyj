@@ -84,6 +84,9 @@ class GoodsController extends Controller
     {
         //显示选择商品信息
         $goods = Goods::find($id);
+        if (empty($goods)) {
+            return response()->json(['msg' => '商品不存在！', 403]);
+        }
         return response()->json(['data' => ['goods' => $goods]]);
     }
 
@@ -97,8 +100,11 @@ class GoodsController extends Controller
     public function edit($id)
     {
         //编辑指定的内容
-        $shop = Goods::find($id);
-        return view('admin.shop.edit', ['shop' => $shop]);
+        $goods = Goods::find($id);
+        if (empty($shop)) {
+            return response()->json(['msg' => '商品不存在', 403]);
+        }
+        return response()->json(['data' => ['goods' => $goods]]);
     }
 
     /**
@@ -117,9 +123,9 @@ class GoodsController extends Controller
         if (empty($goods)) {
             return response()->json(['msg' => "商品不存在，请核实!"]);
         }
-        $name = Goods::where('name',$data['name'])->first();
-        if(!empty($name)){
-            return response() -> json(['msg'=> '名字重复，请重新命名!']);
+        $name = Goods::where('name', $data['name'])->first();
+        if (!empty($name)) {
+            return response()->json(['msg' => '名字重复，请重新命名!']);
         }
         $goods->name = $data['name'];
         $goods->nickname = $data['nickname'];
