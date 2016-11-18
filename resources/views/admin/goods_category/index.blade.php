@@ -52,7 +52,7 @@
             <th>编辑时间</th>
         </tr>
 
-        @foreach ($goodsCategory as $Category)
+        @foreach ($goodsCategories as $Category)
             <tr>
                 <td>{{$Category->id}}</td>
                 <td>{{$Category->category_id}}</td>
@@ -71,6 +71,7 @@
             </tr>
         @endforeach
     </table>
+    {{$goodsCategories->links()}}
     </div>
 
     <div id="put">
@@ -133,11 +134,11 @@
                 type: 'get',
                 dataType: 'json',
                 success: function (data) {
-                    $("#id1").val(data.data.goodsCategory.id);
-                    $("#name").val(data.data.goodsCategory.category_id);
-                    $("#nickname").val(data.data.goodsCategory.name);
-                    $("#description").val(data.data.goodsCategory.logo);
-                    $("#price").val(data.data.goodsCategory.url);
+                    $("#id1").val(data.id);
+                    $("#name").val(data.category_id);
+                    $("#nickname").val(data.name);
+                    $("#description").val(data.logo);
+                    $("#price").val(data.url);
                 }
             });
             $("#put").show();
