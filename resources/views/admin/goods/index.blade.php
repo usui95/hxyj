@@ -74,6 +74,7 @@
             </tr>
         @endforeach
     </table>
+    {{$goods->links()}}
     </div>
 
     <div id="put">

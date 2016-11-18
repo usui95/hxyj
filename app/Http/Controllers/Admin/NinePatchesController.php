@@ -73,6 +73,9 @@ class NinePatchesController extends Controller
     public function show($id)
     {
         $ninePatch = NinePatch::find($id);
+        if (empty($ninePatch)) {
+            return response()->json(['msg' => '九宫格不存在！'], 403);
+        }
         return response()->json(['data' => ['ninePatch' => $ninePatch]]);
     }
 
@@ -86,7 +89,10 @@ class NinePatchesController extends Controller
     {
         //更新
         $ninePatch = NinePatch::find($id);
-        return view('admin.nine_Patch.edit', ['ninePatch' => $ninePatch]);
+        if (empty($ninePatch)) {
+            return response()->json(['msg' => '九宫格不存在！'], 403);
+        }
+        return response()->json(['data' => ['ninePatch' => $ninePatch]]);
     }
 
     /**
@@ -106,19 +112,31 @@ class NinePatchesController extends Controller
             return response()->json(['msg' => '您要更新的不存在，请核实！']);
         }
         //判断更新后名字是否有相同
-        $name = NinePatch::where('name', $data['name'])->first();
-        if (!empty($name)) {
-            return response()->json(['msg' => '名字已存在，请重新命名!']);
+        $name = NinePatch::all(['name'])->toArray();
+        if (in_array(['name' => $data['name']], $name)) {
+            if ($data['name'] == $nicePatch['name']) {
+                $nicePatch->thumb = $data['thumb'];
+                $nicePatch->url = $data['url'];
+                $nicePatch->weight = $data['weight'];
+                $nicePatch->create_time = time();
+                //保存
+                $nicePatch->save();
+                //推送
+                return response()->json(['msg' => '更新成功', 'data' => ['ninePatch' => $nicePatch]]);
+            } else {
+                return response()->json(['msg' => '名字重复，请重新命名']);
+            }
+        } else {
+            $nicePatch->name = $data['name'];
+            $nicePatch->thumb = $data['thumb'];
+            $nicePatch->url = $data['url'];
+            $nicePatch->weight = $data['weight'];
+            $nicePatch->create_time = time();
+            //保存
+            $nicePatch->save();
+            //推送
+            return response()->json(['msg' => '更新成功', 'data' => ['ninePatch' => $nicePatch]]);
         }
-        $nicePatch->name = $data['name'];
-        $nicePatch->thumb = $data['thumb'];
-        $nicePatch->url = $data['url'];
-        $nicePatch->weight = $data['weight'];
-        $nicePatch->create_time = time();
-        //保存
-        $nicePatch->save();
-        //推送
-        return response()->json(['msg' => '更新成功', 'data' => ['ninePatch' => $nicePatch]]);
     }
 
     /**
