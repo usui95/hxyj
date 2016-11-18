@@ -18,6 +18,8 @@ class GoodsCategoryController extends Controller
     public function index()
     {
         //
+        $goodsCategory = GoodsCategory::all();
+        return view('admin.goods_category.index',['goodsCategory'=>$goodsCategory]);
     }
 
     /**

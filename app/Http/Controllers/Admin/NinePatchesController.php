@@ -23,7 +23,7 @@ class NinePatchesController extends Controller
         } else {
             $ninePatch = NinePatch::simplePaginate(10);
         }
-        return view('admin.nine_patch.index', ['ninepatch' => $ninePatch]);
+       return view('admin.nine_patch.index', ['ninePatch' => $ninePatch]);
     }
 
     /**
