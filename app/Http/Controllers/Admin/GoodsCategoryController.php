@@ -10,14 +10,32 @@ use App\Http\Controllers\Controller;
 
 class GoodsCategoryController extends Controller
 {
+
+    const LIST_ONLY_CATEGORY_ID = 1;
+    const LIST_CATEGORY_ID_AND_NAME = 2;
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        // 获取列表
+        switch ((int)$request->input('type')) {
+            case self::LIST_ONLY_CATEGORY_ID: // 使用category_id
+                $goodsCategories = GoodsCategory::where('category_id', $request->get('category_id'))->simplePaginate(10);
+                break;
+            case self::LIST_CATEGORY_ID_AND_NAME: // 使用category_id+name
+                $goodsCategories = GoodsCategory::where('category_id', $request->get('category_id'))->where('category_id', $request->input('name'))->simplePaginate(10);
+                break;
+            default: // 什么都不使用
+                $goodsCategories = GoodsCategory::simplePaginate(10);
+        }
+
+        return view('admin.goods_category.index', [
+            'goodsCategories' => $goodsCategories,
+        ]);
     }
 
     /**
@@ -73,7 +91,7 @@ class GoodsCategoryController extends Controller
         if (empty($goodsCategory)) {
             return response()->json(['msg' => '商品分类不存在'], 403);
         }
-        return response()->json(['data' => ['goodsCategory' => $goodsCategory]]);
+        return response()->json($goodsCategory);
     }
 
     /**
