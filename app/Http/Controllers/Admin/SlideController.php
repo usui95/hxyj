@@ -50,11 +50,11 @@ class SlideController extends Controller
     {
         //获取新增数据
         $data = $request->all();
-        //验证图片是否存在
-        $slide = Slide::where('id', $data['id'])->first();
-        if (!empty($slide)) {
-            return response()->json(['msg' => '该图片已添加，无需重复添加']);
-        }
+//        //验证图片是否存在
+//        $slide = Slide::where('id', $data['id'])->first();
+//        if (!empty($slide)) {
+//            return response()->json(['msg' => '该图片已添加，无需重复添加']);
+//        }
         //添加
         $slide = new Slide();
         $slide->url = $data['url'];
