@@ -18,6 +18,7 @@ class NinePatchesController extends Controller
     public function index(Request $request)
     {
         //主页
+        //dd(NinePatch::all());
         if ($request->input('name')) {
             $ninePatch = NinePatch::where('name', $request->get('name'))->simplePaginate(10);
         } else {

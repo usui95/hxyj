@@ -5,39 +5,29 @@
         <li>九宫格</li>
         <li>九宫格新增</li>
     </ol>
-    <form>
-        <div>
-            <label for="name">商品名称:</label>
-            <input type="text" id="name" placeholder=" 请输入商品名称"/>
-        </div>
-        <div>
-            <label for="thumb">图片:</label>
-            <input type="text" id="loge" placeholder=" "/>
-        </div>
-        <div>
-            <label for="url">跳转地址:</label>
-            <input type="text" id="urlAddress" placeholder=" "/>
-        </div>
-        <div>
-            <label for="weight">权重:</label>
-            <input type="text" id="urlAddress" placeholder=" "/>
-        </div>
-
-
+    <form role="form" id="form">
+        {{ csrf_field() }}
+      {{--  <div class="form-group">
+            <label for="name">九宫格ID:</label>
+            <input type="text" id="id" class="form-control"  placeholder=" 请输入九宫格ID"/>
+        </div>--}}
         <div class="form-group">
-            <select class="form-control" id="option">
-                <option value="0">&lt;----请选择商品分类列表------&gt;</option>
-                <option value="1">礼品套餐</option>
-                <option value="2">礼品</option>
-                <option value="3">香烟</option>
-                <option value="4">茶叶</option>
-                <option value="5">洋酒</option>
-                <option value="6">红酒</option>
-                <option value="7">老酒</option>
-                <option value="8">零食</option>
-                <option value="9">白酒</option>
-            </select>
+            <label for="name">商品名称:</label>
+            <input type="text" id="name" class="form-control"  placeholder=" 请输入商品名称"/>
         </div>
+        <div class="form-group">
+            <label for="thumb">图片:</label>
+            <input type="text" class="form-control" id="thumb" placeholder="请选择图片 "/>
+        </div>
+        <div class="form-group">
+            <label for="url">跳转地址:</label>
+            <input type="text" class="form-control" id="url" placeholder=" 请输入跳转地址"/>
+        </div>
+        <div class="form-group">
+            <label for="weight">权重:</label>
+            <input type="text" id="weight" class="form-control" placeholder=" 请设置权重"/>
+        </div>
+
         <button type="button" id="submit" class="btn btn-default btn-success">提交</button>
         <button type="reset" class="btn btn-default btn-danger">重置</button>
     </form>
@@ -45,21 +35,23 @@
     <script>
         $(function(){
             $('#submit').click(function () {
-                    if ($("#name").val() == "" || $("#thumb").val() == "" || $("#url").val == "" || $("#weight").val() == "") {
+                    if (/*$("#id").val() == ""||*/$("#name").val() == "" || $("#thumb").val() == "" || $("#url").val == "" || $("#weight").val() == "") {
                         alert(" 请输入完整的信息");
                         return false;
                     }
                     else {
                         var Json = {
                             _token: $('input[name="_token"]').val(),
+                          /*  id:$("#id").val(),*/
                             name: $("#name").val(),
                             thumb: $("#thumb").val(),
                             url: $("#url").val(),
                             weight: $("#weight").val()
                         }
                     }
+                    console.log(Json);
                     $.ajax({
-                        url: 'admin/ninePatch/create',
+                        url: '/admin/ninePatch',
                         type: 'post',
                         data: Json,
                         datatype: 'json',

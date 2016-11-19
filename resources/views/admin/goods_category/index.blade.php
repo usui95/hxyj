@@ -21,7 +21,7 @@
             margin-left: -217px;
             text-align: center;
             display: none;
-            padding:70px;
+            padding: 70px;
             border: 8px solid #ff0000;
         }
 
@@ -51,7 +51,6 @@
             <th>更新时间</th>
             <th>编辑时间</th>
         </tr>
-
         @foreach ($goodsCategories as $Category)
             <tr>
                 <td>{{$Category->id}}</td>
