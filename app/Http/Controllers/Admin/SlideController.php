@@ -21,9 +21,9 @@ class SlideController extends Controller
         //读取数据库并设置分页
        // dd(Slide::all());
         if ($request->input('name')) {
-            $slide = Slide::where('name', $request->get('name'))->simplePaginate(2);
+            $slide = Slide::where('name', $request->get('name'))->simplePaginate(5);
         } else {
-            $slide = Slide::simplePaginate(2);
+            $slide = Slide::simplePaginate(5);
         }
         return view('admin.slide.index', ['slide' => $slide]);
     }
@@ -126,7 +126,7 @@ class SlideController extends Controller
                 $slide->save();
                 return response()->json(['msg' => '更新成功', 'data' => ['slide' => $slide]]);
             } else {
-                return response()->json(['msg' => '图片重复，请重新添加']);
+                return response()->json(['msg' => '图片名重复，请重新添加']);
             }
         } else {
             $slide->url = $data['url'];
