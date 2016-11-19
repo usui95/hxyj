@@ -19,7 +19,7 @@ class SlideController extends Controller
     public function index(Request $request)
     {
         //读取数据库并设置分页
-        dd(Slide::all());
+       // dd(Slide::all());
         if ($request->input('src')) {
             $slide = Slide::where('src', $request->get('src'))->simplePaginate(10);
         } else {
