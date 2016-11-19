@@ -7,10 +7,6 @@
     </ol>
     <form role="form" id="form">
         {{ csrf_field() }}
-      {{--  <div class="form-group">
-            <label for="name">九宫格ID:</label>
-            <input type="text" id="id" class="form-control"  placeholder=" 请输入九宫格ID"/>
-        </div>--}}
         <div class="form-group">
             <label for="name">商品名称:</label>
             <input type="text" id="name" class="form-control"  placeholder=" 请输入商品名称"/>
@@ -35,14 +31,13 @@
     <script>
         $(function(){
             $('#submit').click(function () {
-                    if (/*$("#id").val() == ""||*/$("#name").val() == "" || $("#thumb").val() == "" || $("#url").val == "" || $("#weight").val() == "") {
+                    if ($("#name").val() == "" || $("#thumb").val() == "" || $("#url").val == "" || $("#weight").val() == "") {
                         alert(" 请输入完整的信息");
                         return false;
                     }
                     else {
                         var Json = {
                             _token: $('input[name="_token"]').val(),
-                          /*  id:$("#id").val(),*/
                             name: $("#name").val(),
                             thumb: $("#thumb").val(),
                             url: $("#url").val(),
