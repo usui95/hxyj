@@ -59,17 +59,10 @@
                 <label for="name1">ID:</label>
                 <input type="text" required class="form-control" id="id1" value="" disabled>
             </div>
-
-
             <div class="form-group">
-                <label for="name">店名:</label>
-                <input type="text" required class="form-control" id="name" placeholder=" 请输入店名">
+            <label for="name">名字:</label>
+            <input type="text" required class="form-control" id="name" placeholder="请输入幻灯片名">
             </div>
-
-            {{--<div class="form-group">--}}
-            {{--<label for="name">名字:</label>--}}
-            {{--<input type="text" required class="form-control" id="name" placeholder="请输入幻灯片名">--}}
-            {{--</div>--}}
             <div class="form-group">
                 <label for="Url">跳转地址:</label>
                 <input type="text" required class="form-control" id="Url" placeholder="请输入跳转地址">
@@ -140,7 +133,7 @@
             console.log(PuT);
             var JSon = {
                 _token: $('input[name="_token"]').val(),
-//                    name: $("#name").val(),
+                    name: $("#name").val(),
                 src: $("#imgSrc").val(),
                 url: $("#Url").val()
             }
@@ -150,9 +143,14 @@
                 data: JSon,
                 datatype: 'json',
                 success: function (data) {
-                    alert(data.msg);
-                    $("#put").hide();
-                    window.location.reload();
+                    if(data.msg=="图片重复，请重新添加"){
+                        alert(data.msg);;
+                    }
+                    else{
+                        alert(data.msg);
+                        $("#put").hide();
+                        window.location.reload();
+                    }
                 }
             })
         });
