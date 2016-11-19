@@ -22,7 +22,7 @@
     </ul>
     <ul class="nav nav-pills nav-stacked" role="tablist">
         <li role="presentation" class="active"><a href="#">九宫格</a></li>
-        <li role="presentation"><a href="/admin/slide">九宫格列表</a></li>
-        <li role="presentation"><a href="/admin/slide/create">九宫格新增</a></li>
+        <li role="presentation"><a href="/admin/ninePatch">九宫格列表</a></li>
+        <li role="presentation"><a href="/admin/ninePatch/create">九宫格新增</a></li>
     </ul>
 </div>
