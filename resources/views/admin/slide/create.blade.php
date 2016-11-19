@@ -15,10 +15,10 @@
         {{ csrf_field() }}
 
 
-        {{--<div class="form-group">--}}
-            {{--<label for="name">名字:</label>--}}
-            {{--<input type="text" required class="form-control" id="name" placeholder="请输入幻灯片名">--}}
-        {{--</div>--}}
+        <div class="form-group">
+            <label for="name">名字:</label>
+            <input type="text" required class="form-control" id="name" placeholder="请输入幻灯片名">
+        </div>
         <div class="form-group">
             <label for="Url">跳转地址:</label>
             <input type="text" required class="form-control" id="Url" placeholder="请输入跳转地址">
@@ -33,14 +33,14 @@
     </form>
     <script type="text/javascript">
         $('#submit').click(function () {
-          if (/*$("#name").val() == "" ||*/ $("#url").val() == "" || $("#imgSrc").val() == "") {
+          if ($("#name").val() == "" ||$("#url").val() == "" || $("#imgSrc").val() == "") {
                 alert(" 请输入完整的信息");
                 return false;
             }
             else {
                 var jsonAdmin = {
                     _token: $('input[name="_token"]').val(),
-//                    name: $("#name").val(),
+                    name: $("#name").val(),
                     src: $("#imgSrc").val(),
                     url: $("#Url").val()
                 }
