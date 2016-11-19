@@ -20,10 +20,10 @@ class SlideController extends Controller
     {
         //读取数据库并设置分页
        // dd(Slide::all());
-        if ($request->input('src')) {
-            $slide = Slide::where('src', $request->get('src'))->simplePaginate(10);
+        if ($request->input('name')) {
+            $slide = Slide::where('name', $request->get('name'))->simplePaginate(2);
         } else {
-            $slide = Slide::simplePaginate(10);
+            $slide = Slide::simplePaginate(2);
         }
         return view('admin.slide.index', ['slide' => $slide]);
     }
@@ -51,14 +51,14 @@ class SlideController extends Controller
         //获取新增数据
         $data = $request->all();
 //        //验证图片是否存在
-//        $slide = Slide::where('id', $data['id'])->first();
-//        if (!empty($slide)) {
-//            return response()->json(['msg' => '该图片已添加，无需重复添加']);
-//        }
+        $slide = Slide::where('name', $data['name'])->first();
+        if (!empty($slide)) {
+            return response()->json(['msg' => '该图片已添加，无需重复添加']);
+        }
         //添加
         $slide = new Slide();
         $slide->url = $data['url'];
-//        $slide->name = $data['name'];
+        $slide->name = $data['name'];
         $slide->src = $data['src'];
         $slide->create_time = time();
         $slide->save();
@@ -116,11 +116,11 @@ class SlideController extends Controller
         if (empty($slide)) {
             return response()->json(['msg' => "图片不存在，请核实!"]);
         }
-        $name = Slide::all(['src'])->toArray();
-        if (in_array(['src' => $data['src']], $name)) {
-            if ($data['src'] == $slide['src']) {
+        $name = Slide::all(['name'])->toArray();
+        if (in_array(['name' => $data['name']], $name)) {
+            if ($data['name'] == $slide['name']) {
                 $slide->url = $data['url'];
-              //  $slide->name = $data['name'];
+                $slide->name = $data['name'];
                 $slide->src = $data['src'];
                 $slide->create_time = time();
                 $slide->save();
@@ -130,7 +130,7 @@ class SlideController extends Controller
             }
         } else {
             $slide->url = $data['url'];
-        //    $slide->name = $data['name'];
+            $slide->name = $data['name'];
             $slide->src = $data['src'];
             $slide->create_time = time();
             $slide->save();
