@@ -96,15 +96,15 @@
             </div>
             <div class="form-group">
                 <label for="nickname">商品名称:</label>
-                <input type="text" class="form-control" id="nickname" placeholder=" 请输入商品别名"/>
+                <input type="text" class="form-control" id="nickname" placeholder=" 请输入商品名称"/>
             </div>
             <div class="form-group">
                 <label for="description">logo地址:</label>
-                <input type="text" class="form-control" id="description" placeholder=" 请输入商品描述"/>
+                <input type="text" class="form-control" id="description" placeholder=" 请输入logo地址"/>
             </div>
             <div class="form-group">
                 <label for="price">跳转地址:</label>
-                <input type="text" class="form-control" id="price" placeholder=" 请输入商品价格"/>
+                <input type="text" class="form-control" id="price" placeholder=" 请输入跳转地址"/>
             </div>
             <button type="button" id="button" class="btn btn-default btn-success">确定修改</button>
             &nbsp;&nbsp;
