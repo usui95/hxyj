@@ -2,6 +2,15 @@
 
 
 @section('body')
+    <style type="text/css">
+        .page-index .list .img .ico {
+            height:100%;
+            margin-right:1rem;
+        }
+        .page-index .list .img {;
+            margin-right: 0.2rem;
+        }
+    </style>
     <div id="wrapper">
         <div class="page-index" id="home">
             <div id="focus" class="focus" style="width: 100%;height:auto;">
@@ -129,7 +138,6 @@
                         data: Id,
                         datatype: 'json',
                         success: function (data) {
-//                            console.log(data);
                             if (data.msg == "获取成功") {
                                 if (data.data.shops.length != 0) {
                                     data.data.shops.forEach(function (item, index, array) {

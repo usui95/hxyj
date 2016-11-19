@@ -25,10 +25,10 @@
             <label for="urlAddress">商品跳转地址:</label>
             <input type="text" class="form-control" id="urlAddress" placeholder=" 请输入页面跳转地址"/>
         </div>
-        {{--<div class="form-group">--}}
-            {{--<label for="price">商品价格:</label>--}}
-            {{--<input type="text" class="form-control" id="price" placeholder=" 请输入商品价格"/>--}}
-        {{--</div>--}}
+        <div class="form-group">
+            <label for="price">商品价格:</label>
+            <input type="text" class="form-control" id="price" placeholder=" 请输入商品价格"/>
+        </div>
         <div class="form-group">
         <select class="form-control" id="option">
             <option value="0">&lt;----请选择商品分类列表------&gt;</option>
