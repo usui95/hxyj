@@ -11,7 +11,8 @@ class Photo extends Model
     const MAX_SIZE = 5 * 1024 * 1024;
     const EXTENSIONS = ['jpg', 'jpeg', 'png'];
 
-    public $timestamps = false;
+    protected $dates = ['deleted_at'];
+    protected $dateFormat = 'U';
 
     public static function dir()
     {

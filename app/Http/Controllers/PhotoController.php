@@ -41,18 +41,29 @@ class PhotoController extends Controller
     public function store(Request $request)
     {
         // 过滤
-        if (!$request->has('photo')) {
-            return response()->json(['msg' => '请指定图片字段']);
-        }
-        if (!Photo::isSizeOkay()) {
+//        if (!$request->has('photo')) {
+//            return response()->json(['msg' => '请指定图片字段']);
+//        }
+        if (!Photo::isSizeOkay($request->file('photo'))) {
             return response()->json(['msg' => '图片最大不能超过5M']);
         }
-        if (!Photo::isExtensionOkay()) {
+        if (!Photo::isExtensionOkay($request->file('photo'))) {
             return response()->json(['msg' => '图片只支持jpeg/jpg/png格式']);
         }
 
+
         // 执行
+        // 存储
         $path = $request->file('photo')->storeAs('photos', Photo::filename($request->file('photo')));
+
+        // DB
+        $info = getimagesize($request->file('photo')->getRealPath());
+        $photo = new Photo();
+        $photo->size = $request->file('photo')->getSize();
+        $photo->height = $info[0];
+        $photo->width = $info[1];
+        $photo->mime = $request->file('photo')->getMimeType();
+        $photo->save();
 
         // 提示
         return response()->json([
