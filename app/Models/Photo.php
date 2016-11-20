@@ -7,6 +7,10 @@ use Illuminate\Http\UploadedFile;
 
 class Photo extends Model
 {
+
+    const MAX_SIZE = 5 * 1024 * 1024;
+    const EXTENSIONS = ['jpg', 'jpeg', 'png'];
+
     public $timestamps = false;
 
     public static function dir()
@@ -22,4 +26,15 @@ class Photo extends Model
         $ext = $photo->extension();
         return self::dir() . '/' . md5(microtime()) . '.' . $ext;
     }
+
+    public static function isSizeOkay(UploadedFile $photo)
+    {
+        return $photo->getSize() <= 5 * 1024 * 1024 ? true : false;
+    }
+
+    public static function isExtensionOkay(UploadedFile $photo)
+    {
+        return in_array($photo->extension(), self::EXTENSIONS) ? true : false;
+    }
+
 }

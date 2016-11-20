@@ -16,10 +16,10 @@ class PhotoController extends Controller
      */
     public function index()
     {
-        $size = Storage::size('photos/c2/0d/0d2fe2c749cda71aea5f8f5da3ec2b84.jpeg');
-        echo $size;exit;
+        // 获取自己的列表 @todo
+        $photos = Photo::simplePaginate(10);
 
-        return view('photo.index');
+        return view('photo.index', $photos);
     }
 
     /**
@@ -29,7 +29,7 @@ class PhotoController extends Controller
      */
     public function create()
     {
-        //
+        return view('photo.create');
     }
 
     /**
@@ -40,7 +40,16 @@ class PhotoController extends Controller
      */
     public function store(Request $request)
     {
-        // 过滤 @todo 1) 查看是否有文件上传 2)是否是符合条件的图片文件
+        // 过滤
+        if (!$request->has('photo')) {
+            return response()->json(['msg' => '请指定图片字段']);
+        }
+        if (!Photo::isSizeOkay()) {
+            return response()->json(['msg' => '图片最大不能超过5M']);
+        }
+        if (!Photo::isExtensionOkay()) {
+            return response()->json(['msg' => '图片只支持jpeg/jpg/png格式']);
+        }
 
         // 执行
         $path = $request->file('photo')->storeAs('photos', Photo::filename($request->file('photo')));
@@ -49,7 +58,8 @@ class PhotoController extends Controller
         return response()->json([
             'msg' => '上传成功',
             'data' => [
-                'path' => $path
+                'path' => $path,
+                'url' => asset("storage/{$path}"),
             ]
         ]);
     }
@@ -62,7 +72,7 @@ class PhotoController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
