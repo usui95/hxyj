@@ -27,7 +27,6 @@
     </ul>
     <ul class="nav nav-pills nav-stacked" role="tablist">
         <li role="presentation" class="active"><a href="#">图片</a></li>
-        <li role="presentation"><a href="/admin/ninePatch">图片列表</a></li>
-        <li role="presentation"><a href="/admin/photos/create">图片新增</a></li>
+        <li role="presentation"><a href="#">图片列表</a></li>
     </ul>
 </div>

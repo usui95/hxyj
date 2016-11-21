@@ -30,6 +30,19 @@
             font-size: 15px;
             font-weight: 800;
         }
+        .abs{
+            position: absolute;
+            top: 279px;
+            left: 112px;
+        }
+        input[type=file]{
+            width:71px;
+            background: #000;
+            color: #FFFFFF;
+        }
+        #thumb{
+            padding-left:90px;
+        }
     </style>
     <ol class="breadcrumb" style="background: #5e87ab;">
         <li>
@@ -53,7 +66,7 @@
             <tr>
                 <td>{{$ninePathes->id}}</td>
                 <td>{{$ninePathes->name}}</td>
-                <td>{{$ninePathes->thumb}}</td>
+                <td><img src="{{$ninePathes->thumb}}" width="50px" /></td>
                 <td>{{$ninePathes->url}}</td>
                 <td>{{$ninePathes->weight}}</td>
                 <td>{{$ninePathes->create_time}}</td>
@@ -68,6 +81,13 @@
     </div>
 
     <div id="put">
+        <div class="abs">
+            <form id="uploadForm" enctype="multipart/form-data">
+                <input id="file" required  type="file" name="photo" value="" width="75px" />
+
+                {{ csrf_field() }}
+            </form>
+        </div>
         <form role="form" id="form" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="name1">九宫格ID:</label>
@@ -79,7 +99,7 @@
             </div>
             <div class="form-group">
                 <label for="name1">商品图片：</label>
-                <input type="text" class="form-control" id="thumb" placeholder=" 请输入商品图片">
+                <input type="text" class="form-control" id="thumb" placeholder=" 请输入商品图片" disabled>
             </div>
             <div class="form-group">
                 <label for="name1">跳转地址：</label>
@@ -101,6 +121,28 @@
         <button type="button" type="button" id="confirm" class="btn-danger btn">确定删除</button>
     </div>
     <script>
+        $("#file").blur(function() {
+            if($("#file").val()==""){
+                return false;
+            }
+            else{
+
+                $.ajax({
+                    url: '/photos',
+                    type: 'POST',
+                    cache: false,
+                    data: new FormData($('#uploadForm')[0]),
+                    processData: false,
+                    contentType: false,
+                    success:function(data){
+                        $("#thumb").val(data.data.url);
+                        $("#file").val("");
+                    }
+                })
+            }
+        });
+
+
         var PuT;
         var url;
         $("#res").on('click', '.put', function (e) {

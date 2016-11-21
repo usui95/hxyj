@@ -31,6 +31,19 @@
             font-size: 15px;
             font-weight: 800;
         }
+        .abs{
+            position: absolute;
+            top: 424px;
+            left: 112px;
+        }
+        input[type=file]{
+            width:71px;
+            background: #000;
+            color: #FFFFFF;
+        }
+        #logo{
+            padding-left:90px;
+        }
     </style>
 
     <ol class="breadcrumb" style="background: #5e87ab;">
@@ -52,6 +65,13 @@
         <button type="submit" class="btn btn-success">查询</button>
     </form>
     <div id="put">
+        <div class="abs">
+            <form id="uploadForm" enctype="multipart/form-data">
+                <input id="file" required  type="file" name="photo" value="" width="75px" />
+
+                {{ csrf_field() }}
+            </form>
+        </div>
         <form role="form" id="form" enctype="multipart/form-data">
 
             <div class="form-group">
@@ -75,7 +95,7 @@
             </div>
             <div class="form-group">
                 <label for="logo">店铺LOGO:</label>
-                <input type="text" required class="form-control" id="logo" placeholder="请输入店铺LOGO">
+                <input type="text" required class="form-control" id="logo" placeholder="请输入店铺LOGO" disabled>
             </div>
             <div class="form-group">
                 <label for="tel">手机号码:</label>
@@ -126,6 +146,30 @@
         {{$shops->links()}}
     </div>
     <script type="text/javascript">
+        $("#file").blur(function() {
+            if($("#file").val()==""){
+                return false;
+            }
+            else{
+
+                $.ajax({
+                    url: '/photos',
+                    type: 'POST',
+                    cache: false,
+                    data: new FormData($('#uploadForm')[0]),
+                    processData: false,
+                    contentType: false,
+                    success:function(data){
+                        $("#logo").val(data.data.url);
+                        $("#file").val("");
+                    }
+                })
+            }
+        });
+
+
+
+
         var PuT;
         var url;
         $("#res").on('click', '.put', function (e) {
