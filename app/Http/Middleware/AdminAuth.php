@@ -15,7 +15,11 @@ class AdminAuth
      */
     public function handle($request, Closure $next)
     {
-        // session验证登录并且登录未超时
+        $role = $request->session()->get('role');
+        if ($role !== 'admin') {
+            return redirect('admin/login');
+        }
+
         return $next($request);
     }
 }
