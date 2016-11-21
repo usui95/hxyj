@@ -13,9 +13,9 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-
                 <li>
-                    <a href="#">退出登录</a>
+                    <a href="#" id="quit">退出登录</a>
+                    {{ csrf_field() }}
                 </li>
 
             </ul> </div>
@@ -23,3 +23,21 @@
     </div>
     <!-- /.container-fluid -->
 </nav>
+<script type="text/javascript">
+    $("#quit").click(function(){
+        $.ajax({
+            url:'/admin/doLogout',
+            type:'post',
+            datatype:'json',
+            data:$("input[name='_token']"),
+            success:function(data){
+                if(data.msg=='ok'){
+                    window.location.href = "/admin/login";
+                }
+                else{
+                    alert('请求失败，请稍后再试');
+                }
+            }
+        })
+    })
+</script>
