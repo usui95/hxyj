@@ -136,15 +136,15 @@
                     name: $("#name").val(),
                 src: $("#imgSrc").val(),
                 url: $("#Url").val()
-            }
+            };
             $.ajax({
                 url: url,
                 type: 'put',
                 data: JSon,
                 datatype: 'json',
                 success: function (data) {
-                    if(data.msg=="图片重复，请重新添加"){
-                        alert(data.msg);;
+                    if(data.msg=="图片名重复，请重新添加"){
+                        alert(data.msg);
                     }
                     else{
                         alert(data.msg);
