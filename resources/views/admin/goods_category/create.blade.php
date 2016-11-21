@@ -1,5 +1,23 @@
 @extends('admin.layout')
 @section('content')
+    <style type="text/css">
+        .rela{
+            position: relative;
+        }
+        .abs{
+            position: absolute;
+            top: 104px;
+            left: 10px;
+        }
+        input[type=file]{
+            width:71px;
+            background: #000;
+            color: #FFFFFF;
+        }
+        #logo{
+            padding-left:90px;
+        }
+    </style>
     <ol class="breadcrumb" style="background: #5e87ab;">
         <li>
             <a href="#">首页</a>
@@ -10,6 +28,14 @@
         </li>
         <li class="active">九宫格新增</li>
     </ol>
+    <div class="rela">
+        <div class="abs">
+            <form id="uploadForm" enctype="multipart/form-data">
+                <input id="file" required  type="file" name="photo" value="" width="75px" />
+
+                {{ csrf_field() }}
+            </form>
+        </div>
     <form role="form" id="form">
         {{ csrf_field() }}
 
@@ -19,7 +45,7 @@
         </div>
         <div class="form-group">
             <label for="logo">logo地址:</label>
-            <input type="text" class="form-control" id="logo" placeholder=" 请输入logo地址"/>
+            <input type="text" class="form-control" id="logo" placeholder="  " disabled />
         </div>
         <div class="form-group">
             <label for="urlAddress">商品跳转地址:</label>
@@ -46,7 +72,31 @@
         <button type="button" id="submit" class="btn btn-default btn-success">提交</button>
         <button type="reset" class="btn btn-default btn-danger">重置</button>
     </form>
+        </div>
     <script>
+
+        $("#file").blur(function() {
+            if($("#file").val()==""){
+                return false;
+            }
+            else{
+
+                $.ajax({
+                    url: '/photos',
+                    type: 'POST',
+                    cache: false,
+                    data: new FormData($('#uploadForm')[0]),
+                    processData: false,
+                    contentType: false,
+                    success:function(data){
+                        $("#logo").val(data.data.url);
+                        $("#file").val("");
+                    }
+                })
+            }
+        });
+
+
         $('#submit').click(function () {
             if ($("#name").val() == "" || $("#logo").val() == "" || $("#urlAddress").val == "" || $("#option option:selected").val() == "0") {
                 alert(" 请输入完整的信息");
