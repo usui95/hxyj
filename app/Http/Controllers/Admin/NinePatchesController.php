@@ -18,13 +18,12 @@ class NinePatchesController extends Controller
     public function index(Request $request)
     {
         //主页
-        //dd(NinePatch::all());
         if ($request->input('name')) {
             $ninePatch = NinePatch::where('name', $request->get('name'))->simplePaginate(10);
         } else {
             $ninePatch = NinePatch::simplePaginate(10);
         }
-       return view('admin.nine_patch.index', ['ninePatch' => $ninePatch]);
+        return view('admin.nine_patch.index', ['ninePatch' => $ninePatch]);
     }
 
     /**
