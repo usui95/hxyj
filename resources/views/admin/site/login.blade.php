@@ -137,24 +137,7 @@
                             </button>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-xs-6 link">
-                            <p class="text-center remove-margin">
-                                <small>忘记密码？</small>
-                                <a href="javascript:void(0)">
-                                    <small>找回</small>
-                                </a>
-                            </p>
-                        </div>
-                        <div class="col-xs-6 link">
-                            <p class="text-center remove-margin">
-                                <small>还没注册?</small>
-                                <a href="javascript:void(0)">
-                                    <small>注册</small>
-                                </a>
-                            </p>
-                        </div>
-                    </div>
+
                 </form>
             </div>
         </div>
@@ -182,6 +165,19 @@
                     type: 'post',
                     data: JSon,
                     datatype: 'json',
+                    statusCode: {
+                        404: function () {
+                            alert('页面加载失败，请稍后再试');
+                        }, 403: function (data) {
+                            if (data.responseJSON.msg == '密码错误') {
+                                alert(data.responseJSON.msg);
+                            }
+                            else if (data.responseJSON.msg == '用户不存在') {
+                                alert(data.responseJSON.msg)
+                            }
+
+                        }
+                    },
                     success: function (data, textStatus) {
                         console.log(data);
                         if (data.msg == "用户不存在") {
@@ -193,8 +189,8 @@
                         else if (data.msg == "登录成功") {
                             window.location.href = "/admin";
                         }
-                        else{
-                            alert("登录失败"); 
+                        else {
+                            alert("登录失败");
                         }
                     }
                 })

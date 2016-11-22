@@ -32,6 +32,19 @@
             font-size: 15px;
             font-weight: 800;
         }
+        .abs{
+            position: absolute;
+            top: 352px;
+            left: 112px;
+        }
+        input[type=file]{
+            width:71px;
+            background: #000;
+            color: #FFFFFF;
+        }
+        #imgSrc{
+            padding-left:90px;
+        }
     </style>
 
     <ol class="breadcrumb" style="background: #5e87ab;">
@@ -40,7 +53,7 @@
         </li>
 
         <li>
-            <a href="#">商户管理</a>
+            <a href="#">幻灯片管理</a>
         </li>
         <li class="active">列表</li>
     </ol>
@@ -53,6 +66,13 @@
         <button type="submit" class="btn btn-success">查询</button>
     </form>
     <div id="put">
+        <div class="abs">
+            <form id="uploadForm" enctype="multipart/form-data">
+                <input id="file" required  type="file" name="photo" value="" width="75px" />
+
+                {{ csrf_field() }}
+            </form>
+        </div>
         <form role="form" id="form" enctype="multipart/form-data">
 
             <div class="form-group">
@@ -69,7 +89,7 @@
             </div>
             <div class="form-group">
                 <label for="imgSrc">图片地址:</label>
-                <input type="tel" required class="form-control" id="imgSrc" placeholder="请输入图片地址">
+                <input type="tel" required class="form-control" id="imgSrc" placeholder="请输入图片地址" disabled>
             </div>
             <button type="button" id="button" class="btn btn-default btn-success">确定修改</button>
             &nbsp;&nbsp;
@@ -110,6 +130,31 @@
         {{$slide->links()}}
     </div>
     <script type="text/javascript">
+
+        $("#file").blur(function() {
+            if($("#file").val()==""){
+                return false;
+            }
+            else{
+
+                $.ajax({
+                    url: '/photos',
+                    type: 'POST',
+                    cache: false,
+                    data: new FormData($('#uploadForm')[0]),
+                    processData: false,
+                    contentType: false,
+                    success:function(data){
+                        $("#imgSrc").val(data.data.url);
+                        $("#file").val("");
+                    }
+                })
+            }
+        });
+
+
+
+
         var PuT;
         var url;
         $("#res").on('click', '.put', function (e) {

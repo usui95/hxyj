@@ -24,13 +24,15 @@ Route::resource('goods', 'GoodsController'); // 商品详情页
 /************** 后台路由 **************/
 Route::get('/admin/login', 'Admin\SiteController@login'); // 后台登录页面
 Route::post('/admin/doLogin', 'Admin\SiteController@doLogin'); // 后台登录页面
-Route::get('/admin', 'Admin\IndexController@index')->name('admin'); // 后台首页
-Route::resource('/admin/shops', 'Admin\ShopController');
-Route::resource('/admin/goods', 'Admin\GoodsController');
-Route::resource('/admin/goodsCategory', 'Admin\GoodsCategoryController');
-Route::resource('/admin/goodsCategories', 'Admin\GoodsCategoryController');
-Route::resource('/admin/ninePatch', 'Admin\NinePatchesController');
-Route::resource('/admin/slide', 'Admin\SlideController');
+Route::group(['middleware' => ['admin']], function () {
+    Route::get('/admin', 'Admin\IndexController@index')->name('admin'); // 后台首页
+    Route::post('/admin/doLogout', 'Admin\SiteController@doLogout'); // 后台登出
+    Route::resource('/admin/goodsCategories', 'Admin\GoodsCategoryController');
+    Route::resource('/admin/shops', 'Admin\ShopController');
+    Route::resource('/admin/goods', 'Admin\GoodsController');
+    Route::resource('/admin/ninePatch', 'Admin\NinePatchesController');
+    Route::resource('/admin/slide', 'Admin\SlideController');
+});
 
 
 //Route::get('/', function () {
@@ -60,23 +62,23 @@ Route::resource('/admin/slide', 'Admin\SlideController');
 //Route::resource('photos', 'PhotoController');
 
 // 首页
-Route::get('/', 'IndexController@home')->name('home');
+//Route::get('/', 'IndexController@home')->name('home');
 
 // 分类
-Route::get('/c', 'IndexController@category')->name('category');
+//Route::get('/c', 'IndexController@category')->name('category');
 
 // 商品详情页
-Route::resource('goods', 'GoodsController');
+//Route::resource('goods', 'GoodsController');
 
 /* 通用服务 */
-Route::resource('photos', 'PhotoController');
+//Route::resource('photos', 'PhotoController');
 
 /*   后台路由   */
 
 // 后台首页
-Route::get('/admin', 'Admin\IndexController@index')->name('admin');
-Route::resource('/admin/shops', 'Admin\ShopController');
-Route::resource('/admin/goods', 'Admin\GoodsController');
+//Route::get('/admin', 'Admin\IndexController@index')->name('admin');
+//Route::resource('/admin/shops', 'Admin\ShopController');
+//Route::resource('/admin/goods', 'Admin\GoodsController');
 
 
 
