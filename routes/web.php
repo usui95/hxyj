@@ -32,8 +32,8 @@ Route::group(['middleware' => ['admin']], function () {
     Route::resource('/admin/goods', 'Admin\GoodsController');
     Route::resource('/admin/ninePatch', 'Admin\NinePatchesController');
     Route::resource('/admin/slide', 'Admin\SlideController');
-    Route::resource('shop', 'Admin\ShopsController');
 });
+Route::resource('/shop', 'ShopsController');
 
 
 //Route::get('/', function () {
