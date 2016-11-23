@@ -74,6 +74,7 @@
                 <?php foreach ($shops as $shop): ?>
                 <div class="section"><!--vue-if-->
                     <div class="J_linksign-customize">
+                        <a href="shop/show?id=<?php echo $shop->id ?>">
                         <div class="item" data-id="<?php echo $shop->id ?>">
                             <div class="img">
                                 <img class="ico lazy" src="<?php echo $shop->logo ?>"
@@ -87,9 +88,13 @@
                                 <div class="brief"><p><?php echo $shop->address; ?></p></div>
                                 <div class="price"><p><?php echo $shop->tel; ?></p></div>
                             </div>
+
                         </div><!--v-repeat-body.items-->
+                        </a>
                     </div><!--vue-if-->
+
                 </div>
+
                 <?php endforeach; ?>
             </div>
             @include('../footer')
